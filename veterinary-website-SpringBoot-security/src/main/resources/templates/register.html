@@ -36,7 +36,7 @@
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<a class="dropdown-item" href="/customers/customer-insert-panel">Müşteri Ekle</a>
-								<a class="dropdown-item" href="/customers/get-all-customers">Müşteriler</a>
+								<a class="dropdown-item" href="/customers/customers">Müşteriler</a>
 							</div>
 						</li>
 					</ul>
@@ -51,9 +51,9 @@
 			<img alt=""  class="img-thumbnail " src="https://www.bukrek.com/images/veteriner-gunu.jpg">
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-6" >
 			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
-				<strong>Successful ! </strong> Kayıt işlemi başarılı... 
+				<strong th:text="${message}"></strong> 
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 				</button>

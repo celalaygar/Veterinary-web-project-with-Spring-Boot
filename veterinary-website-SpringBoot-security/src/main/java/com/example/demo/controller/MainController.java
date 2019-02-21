@@ -71,7 +71,7 @@ public class MainController {
     		String pwd = user.getPassword();
     		String encryptPwd = passwordEncoder.encode(pwd);
     		user.setPassword(encryptPwd);
-    		map.put("message", "Successful");
+    		map.put("message", "Kayıt işlemi başarılı.");
     		userRepository.save(user);
 
         }

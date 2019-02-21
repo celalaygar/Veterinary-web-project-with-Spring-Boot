@@ -34,7 +34,7 @@
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<a class="dropdown-item" href="/customers/customer-insert-panel">Müşteri Ekle</a>
-								<a class="dropdown-item" href="/customers/get-all-customers">Müşteriler</a>
+								<a class="dropdown-item" href="/customers/customers">Müşteriler</a>
 							</div>
 						</li>
 					</ul>
@@ -52,7 +52,7 @@
 		</div>
 
 		<div class="col-md-12"></div>
-		<div class="col-md-4" >
+		<div class="col-md-4"  >
 			<div class="card" style="width: 18rem;">
 				<img class="card-img-top" src="..." alt="Card image cap">
 				<div class="card-body">
@@ -72,9 +72,11 @@
 		</div>
 		
 
-		<div class="col-md-6" >
+		<div class="col-md-8" style="border:3px solid #ddd" >
+			<h1 class="h3 mb-3 font-weight-normal">Hayvan Ekleme Bölümü</h1>
+		    <hr>	
 			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
-				<strong>Successful ! </strong> Kayıt işlemi başarılı... 
+				<strong th:text="${message}"></strong> 
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 				</button>
@@ -94,10 +96,10 @@
 		    </form>
 		</div>
 		
-		<div class="col-md-12">
-			<h3>
-				<span class="badge badge-primary	" th:text="'Sayın '+${customer.getFirstname()}+' Beyin Hayvanları'"></span>
-			</h3>
+		<div class="col-md-12" style="border:3px solid #ddd">
+			<h1 class="h3 mb-3 font-weight-normal">Kayıtlı Hayvanların Listesi</h1>
+		    <hr>	
+
 			<table class="table table-striped table-sm">
 				<thead>
 					<tr>
@@ -113,12 +115,13 @@
 						<td th:text="${singlePet.getName()}"></td>
 						<td th:text="${singlePet.getProblem()}"></td>
 						<td>
-							<a th:href="@{'/customers/update-pet/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
-							<a th:href="@{'/customers/delete-pet/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm">Sil</a>
+							<a th:href="@{'/pets/update-pet/' + ${singlePet.getId()}}" class="btn btn-danger btn-sm">Güncelle</a>
+							<a th:href="@{'/pets/delete-pet/' + ${singlePet.getId()}}" class="btn btn-warning btn-sm">Sil</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
+		    <hr>	
 		</div>
 		</div>
 	</div>

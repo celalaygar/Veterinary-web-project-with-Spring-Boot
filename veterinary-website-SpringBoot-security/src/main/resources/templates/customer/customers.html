@@ -1,16 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Veteriner Uygulaması</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Veteriner Uygulaması</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
-
 <body>
-
-<div class="container">
-	<div class="row">
+	<div class="container">
+		<div class="row">
 			<nav class="col-md-12 navbar navbar-expand-lg navbar-dark bg-dark">
 				<a class="navbar-brand" href="#">Navbar</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,52 +42,58 @@
 			</nav>
 		
 		<div class="col-md-12">	    		
-			<h1 class="h3 mb-3 font-weight-normal">Müşteri Kayıt Bölümü</h1>
+			<h1 class="h3 mb-3 font-weight-normal">Müşteriler Bölümü</h1>
 		    <hr>	
 		</div>
-		<div class="col-md-12">
+		<div class="col-md-6">
 			<span style="font-size: 18px" class="badge badge-info" th:text="'Doktor Adı : ' + ${adminname}"></span>
 			<a href="/logout" class="btn btn-danger">Çıkış Yapın</a>
-		    <hr>
-		</div>
-
-		<div class="col-md-6">
-			<img alt=""  class="img-thumbnail " src="https://www.bukrek.com/images/veteriner-gunu.jpg">
-		</div>		
-
-
-		<div class="col-md-6" style="border:3px solid #ddd">
-			<h1 class="h3 mb-3 font-weight-normal">Müşteri Kayıt Bölümü</h1>
 		    <hr>	
-			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
+		</div>
+		<div class="col-md-12" th:if="${message}">
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
 				<strong th:text="${message}"></strong> 
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-		    <form autocomplete="off" action="#" th:action="@{/customers/customer-insert-panel}" th:object="${customer}" method="post">
-
-		        <label>Müşteri Adı </label>
-		        <input type="text" id="firstName" placeholder="First Name" th:field="*{firstname}" class="form-control"/><br/>
-		
-		        <label>Müşteri Soyadı </label>
-		        <input type="text" id="lastname" placeholder="First Name" th:field="*{lastname}" class="form-control"/><br/>
-		        
-		        <label>Şehir</label>
-		        <input type="text" id="city" placeholder=" Email" th:field="*{city}" class="form-control"/><br/>
-		
-		        <label>Email</label>
-		        <input type="email" id="email" placeholder=" Email" th:field="*{email}" class="form-control"/><br/>
-		        
-		        <button type="submit" class="btn btn-primary text-center form-control">Kaydet</button>
-		    </form>
-    		<div class="margin-top20 text-center"><a th:href="@{/customers}">Müşterileri Gör</a></div>
 		</div>
-		
-		
+		<div class="col-md-12">			
+			<h1 class="h3 mb-3 font-weight-normal">Müşteriler Bölümü</h1>
+		    <hr>	
+			<table class="table table-striped table-sm">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">id</th>
+						<th scope="col">İsim</th>
+						<th scope="col">Soyisim</th>
+						<th scope="col">Şehir</th>
+						<th scope="col">Email</th>
+						<th scope="col">İşlemler</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="customer : ${customers}">
+						<th scope="row">#</th>
+						<td th:text="${customer.getCustomerid()}"></td>
+						<td th:text="${customer.getFirstname()}"></td>
+						<td th:text="${customer.getLastname()}"></td>
+						<td th:text="${customer.getCity()}"></td>
+						<td th:text="${customer.getEmail() }"></td>
+						<td>
+						
+							<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
+							<a th:href="@{'/customers/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
+							<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm">Sil</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
 	</div>
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
