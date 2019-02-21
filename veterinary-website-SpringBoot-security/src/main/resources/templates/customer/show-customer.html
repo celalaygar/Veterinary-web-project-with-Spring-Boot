@@ -42,7 +42,7 @@
 			</nav>
 		
 		<div class="col-md-12">	    		
-			<h1 class="h3 mb-3 font-weight-normal">Müşteriler Bölümü</h1>
+			<h1 class="h3 mb-3 font-weight-normal">Müşteri Detayları ve Hayvan Kayıtları</h1>
 		    <hr>	
 		</div>
 		<div class="col-md-6">
@@ -50,23 +50,16 @@
 			<a href="/logout" class="btn btn-danger">Çıkış Yapın</a>
 		    <hr>	
 		</div>
-		<div class="col-md-6" th:if="${message}">
-			<div class="alert alert-success" role="alert" >
-		        Kayıt işlemi başarılı... ( successful )
-		    </div>
-		</div>
+
 		<div class="col-md-12"></div>
-		<div class="col-md-3" >
+		<div class="col-md-4" >
 			<div class="card" style="width: 18rem;">
 				<img class="card-img-top" src="..." alt="Card image cap">
 				<div class="card-body">
 					<h5 class="card-title">Müşteri Bilgileri</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 				</div>
 				<ul class="list-group list-group-flush">
-					<li class="list-group-item" th:text="${customer.getCustomerid()}"></li>
-					<li class="list-group-item" th:text="${customer.getFirstname()}"></li>
-					<li class="list-group-item" th:text="${customer.getLastname()}"></li>
+					<li class="list-group-item" th:text="${customer.getFirstname()}+' '+${customer.getLastname()}"></li>
 					<li class="list-group-item" th:text="${customer.getCity()}"></li>
 					<li class="list-group-item" th:text="${customer.getEmail()}"></li>
 				</ul>
@@ -77,14 +70,37 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9">
+		
+
+		<div class="col-md-6" >
+			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
+				<strong>Successful ! </strong> Kayıt işlemi başarılı... 
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		    <form autocomplete="off" action="#" th:action="@{'/customers/insert-pet/' + ${customer.getCustomerid()}}" th:object="${pet}" method="post">
+
+		        <label>Hayvan Tipi </label>
+		        <input type="text" id="firstName" placeholder="Hayvan tipi" th:field="*{type}" class="form-control"/><br/>
+		
+		        <label>Hayvan İsmi</label>
+		        <input type="text" id="email" placeholder=" Hayvan ismi" th:field="*{name}" class="form-control"/><br/>
+		
+		        <label>Problem </label>
+		        <input type="text" id="password" placeholder="Hayvan problemi" th:field="*{problem}" class="form-control"/><br/>
+		
+		        <button type="submit" class="btn btn-primary text-center form-control">Ekle</button>
+		    </form>
+		</div>
+		
+		<div class="col-md-12">
 			<h3>
 				<span class="badge badge-primary	" th:text="'Sayın '+${customer.getFirstname()}+' Beyin Hayvanları'"></span>
 			</h3>
 			<table class="table table-striped table-sm">
 				<thead>
 					<tr>
-						<th scope="col">id</th>
 						<th scope="col">Tipi</th>
 						<th scope="col">ismi</th>
 						<th scope="col">problemi</th>
@@ -92,15 +108,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td th:text="${customer.getFirstname()}"></td>
-						<td th:text="${customer.getLastname()}"></td>
-						<td th:text="${customer.getCity()}"></td>
-						<td th:text="${customer.getEmail()}"></td>
+					<tr th:each="singlePet : ${pets}">
+						<td th:text="${singlePet.getType()}"></td>
+						<td th:text="${singlePet.getName()}"></td>
+						<td th:text="${singlePet.getProblem()}"></td>
 						<td>
-							<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
-							<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
-							<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm">Sil</a>
+							<a th:href="@{'/customers/update-pet/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
+							<a th:href="@{'/customers/delete-pet/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm">Sil</a>
 						</td>
 					</tr>
 				</tbody>

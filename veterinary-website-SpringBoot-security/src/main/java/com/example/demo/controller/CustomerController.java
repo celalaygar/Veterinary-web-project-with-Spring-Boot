@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.Customer;
+import com.example.demo.model.Pet;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.CustomerRepository;
+import com.example.demo.repository.PetRepository;
 
 @Controller
 @RequestMapping("/customers")
@@ -29,52 +31,59 @@ public class CustomerController {
 	@Autowired
 	CustomerRepository customerRepository;
 
-	
-	@RequestMapping(value="/get-all-customers",method = RequestMethod.GET)
+	@Autowired
+	PetRepository petRepository;
+
+	@RequestMapping(value = "/get-all-customers", method = RequestMethod.GET)
 	public String getAllCustomers(Map<String, Object> map) {
-		Authentication auth  = SecurityContextHolder.getContext().getAuthentication();
-		List<Customer> customers=customerRepository.findAll();
-    	map.put("adminname", auth.getName());  
-    	map.put("customers", customers);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		List<Customer> customers = customerRepository.findAll();
+		map.put("adminname", auth.getName());
+		map.put("customers", customers);
 		return "customer/get-all-customers";
 	}
-	
-	
-	@RequestMapping(value="/customer-insert-panel",method = RequestMethod.GET)
+
+	@RequestMapping(value = "/customer-insert-panel", method = RequestMethod.GET)
 	public String CustomerRegisterPanel(Map<String, Object> map) {
-		Authentication auth  = SecurityContextHolder.getContext().getAuthentication();
-    	map.put("adminname", auth.getName());  
-    	map.put("customer", new Customer());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("adminname", auth.getName());
+		map.put("customer", new Customer());
 		return "customer/customer-insert-panel";
 	}
-	
-    @RequestMapping(value = "/customer-insert-panel", method = RequestMethod.POST)
-    public String saveRegisterPage(@Valid @ModelAttribute("user") Customer customer, BindingResult result, Model model,Map<String, Object> map) {
-    	
-        model.addAttribute("user", customer);
-        if (result.hasErrors()) {
-            return "customer-insert-panel";
-        } else {
-        	customerRepository.save(customer);
-    		Authentication auth  = SecurityContextHolder.getContext().getAuthentication();
-        	map.put("adminname", auth.getName());  
-        	map.put("customer", new Customer());
-    		map.put("message", "Successful");
 
-        }
-        return "customer-insert-panel";
-    }
-    
-	@RequestMapping(value="/show-customer/{customerid}",method = RequestMethod.GET)
+	@RequestMapping(value = "/customer-insert-panel", method = RequestMethod.POST)
+	public String saveRegisterPage(@Valid @ModelAttribute("user") Customer customer, BindingResult result, Model model,
+			Map<String, Object> map) {
+
+		if (result.hasErrors()) {
+			return "customer-insert-panel";
+		} else {
+			customerRepository.save(customer);
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			map.put("adminname", auth.getName());
+			map.put("customer", new Customer());
+			map.put("message", "Successful");
+
+		}
+		return "customer-insert-panel";
+	}
+
+	@RequestMapping(value = "/show-customer/{customerid}", method = RequestMethod.GET)
 	public String CustomerShowPanel(@PathVariable int customerid, Map<String, Object> map) {
-		Customer customer=customerRepository.findById(customerid).get();
-		Authentication auth  = SecurityContextHolder.getContext().getAuthentication();
-    	map.put("adminname", auth.getName());  
-    	map.put("customer", customer);
+		Customer customer = customerRepository.findById(customerid).get();
+		List<Pet> pets=petRepository.findByCustomer(customer);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("adminname", auth.getName());
+		map.put("customer", customer);
+		map.put("pet", new Pet());
+		map.put("pets", pets);
+		
+		for (Pet pet : pets) {
+			System.out.println(pet.getType());
+		}
 		return "customer/show-customer";
 	}
-    
-    
+
 	@RequestMapping(value="/delete-customer/{customerid}",method = RequestMethod.GET)
 	public String CustomerDelete(@PathVariable int customerid, Map<String, Object> map) {
 		Customer customer=customerRepository.findById(customerid).get();
@@ -86,6 +95,30 @@ public class CustomerController {
     	map.put("customers", customers);
 		map.put("message", "Successful");
 		return "customer/get-all-customers";
+	}
+	
+	@RequestMapping(value="/insert-pet/{customerid}",method = RequestMethod.POST)
+	public String InsertPet(@PathVariable int customerid, Map<String, Object> map,@Valid @ModelAttribute("pet") Pet pet , BindingResult result, Model model) {
+		Customer customer = customerRepository.findById(customerid).get();
+
+		
+		if (result.hasErrors()) {
+			
+			return "customer/show-customer";
+		} else {
+			
+			pet.setCustomer(customer);
+			petRepository.save(pet);
+		}
+		List<Pet> pets=petRepository.findByCustomer(customer);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("adminname", auth.getName());
+		map.put("customer", customer);
+		map.put("pet", new Pet());
+		map.put("pets", pets);
+		map.put("message", "Successful");
+		//return "redirect:/customers/show-customer/"+customerid;
+		return "customer/show-customer";
 	}
 
 }

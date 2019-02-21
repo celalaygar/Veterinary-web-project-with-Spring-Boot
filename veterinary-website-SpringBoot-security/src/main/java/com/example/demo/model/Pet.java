@@ -24,6 +24,21 @@ public class Pet {
     @JoinColumn(name = "customerid")
 	public Customer customer;
 
+	
+	
+	
+	public Pet() {
+		super();
+	}
+
+	public Pet(String type, String name, String problem, Customer customer) {
+		super();
+		this.type = type;
+		this.name = name;
+		this.problem = problem;
+		this.customer = customer;
+	}
+
 	public Long getId() {
 		return id;
 	}

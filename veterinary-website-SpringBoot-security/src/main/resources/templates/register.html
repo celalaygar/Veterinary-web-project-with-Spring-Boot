@@ -50,12 +50,14 @@
 		<div class="col-md-6">
 			<img alt=""  class="img-thumbnail " src="https://www.bukrek.com/images/veteriner-gunu.jpg">
 		</div>
-		<div class="col-md-6" th:if="${message}">
-			<div class="alert alert-success" role="alert" >
-		        Kayıt işlemi başarılı... ( successful )
-		    </div>
-		</div>
-		<div class="col-md-6" th:unless="${message}">
+
+		<div class="col-md-6">
+			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
+				<strong>Successful ! </strong> Kayıt işlemi başarılı... 
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
 		    <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
 
 		        <label>Kullanıcı Adınız </label>
@@ -71,7 +73,6 @@
 		    </form>
     		<div class="margin-top20 text-center"><a th:href="@{/login}">Giriş Sayfasına Git</a></div>
 		</div>
-		
 		
 	</div>
 </div>

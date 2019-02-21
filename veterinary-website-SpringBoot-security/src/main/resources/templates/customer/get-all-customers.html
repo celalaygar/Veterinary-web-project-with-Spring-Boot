@@ -51,9 +51,12 @@
 		    <hr>	
 		</div>
 		<div class="col-md-6" th:if="${message}">
-			<div class="alert alert-success" role="alert" >
-		        Kayıt işlemi başarılı... ( successful )
-		    </div>
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<strong>Successful ! </strong> Kayıt işlemi başarılı... 
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
 		</div>
 		<div class="col-md-12">
 			<table class="table table-striped table-sm">
@@ -79,7 +82,7 @@
 						<td>
 						
 							<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
-							<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
+							<a th:href="@{'/customers/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
 							<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm">Sil</a>
 						</td>
 					</tr>

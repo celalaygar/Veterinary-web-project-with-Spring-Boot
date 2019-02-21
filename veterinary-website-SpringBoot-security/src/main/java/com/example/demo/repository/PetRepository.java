@@ -1,13 +1,17 @@
  package com.example.demo.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Customer;
-import com.example.demo.model.User;
-@Repository
-public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+import com.example.demo.model.Pet;
 
-	User findByEmail(String email);
+@Repository
+public interface PetRepository extends JpaRepository<Pet, Long> {
+
+	List<Pet> findByCustomer(Customer customer);
+
 
 }
