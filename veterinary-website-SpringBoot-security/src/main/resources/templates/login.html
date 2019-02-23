@@ -8,18 +8,14 @@
     <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-
 <div class="container">
 	<div class="row">
 		<div lang="tr" th:replace="fragments/header :: header" ></div>
-	
 		<div class="col-md-12">  
 		    <hr>	
 			<h1 class="h3 mb-3 font-weight-normal"><span class="badge badge-info">Giriş Yap</span></h1>	  
 		    <hr>	
 		</div>
-
 		<div class="col-md-6" >
 			<img alt=""  class="img-thumbnail " src="https://www.bukrek.com/images/veteriner-gunu.jpg">
 		</div>
@@ -28,16 +24,12 @@
 		        Kullanıcı Adı veya Şifre yanlış.
 		    </div>
 		    <form th:action="@{/login}" method="post">
-		
 		        <label>Kullanıcı Adınız</label>
 		        <input type="text" name="username" class="form-control"/>
-		
 		        <label>Şifreniz</label>
 		        <input type="password" id="password" name="password" class="form-control"/>
-		
 		        <br/>
 		        <button class="btn btn-primary text-center form-control" type="submit">Giriş Yap</button>
-		
 		        <br/>
 		        <br/>
 		        <div class="margin-top20 text-center"><a th:href="@{/register}">Üye Olma Sayfasına Git</a>

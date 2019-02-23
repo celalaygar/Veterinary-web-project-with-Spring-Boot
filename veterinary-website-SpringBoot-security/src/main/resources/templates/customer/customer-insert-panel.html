@@ -4,11 +4,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 </head>
-
 <body>
-
 <div class="container">
 	<div class="row">
 		<div lang="tr" th:replace="fragments/header :: header" ></div>
@@ -22,12 +19,9 @@
 			<a href="/logout" class="btn btn-danger">Çıkış Yapın</a>
 		    <hr>
 		</div>
-
 		<div class="col-md-6">
 			<img alt=""  class="img-thumbnail " src="https://www.bukrek.com/images/veteriner-gunu.jpg">
 		</div>		
-
-
 		<div class="col-md-6" style="border:3px solid #ddd">
 			<h1 class="h3 mb-3 font-weight-normal">Müşteri Kayıt Bölümü</h1>
 		    <hr>	
@@ -38,25 +32,18 @@
 				</button>
 			</div>
 		    <form autocomplete="off" action="#" th:action="@{/customers/insert-customer}" th:object="${customer}" method="post">
-
 		        <label>Müşteri Adı </label>
-		        <input type="text" id="firstName" placeholder="First Name" th:field="*{firstname}" class="form-control"/><br/>
-		
+		        <input type="text" id="firstName" placeholder="First Name" th:field="*{firstname}" class="form-control" required="required"/><br/>
 		        <label>Müşteri Soyadı </label>
-		        <input type="text" id="lastname" placeholder="First Name" th:field="*{lastname}" class="form-control"/><br/>
-		        
+		        <input type="text" id="lastname" placeholder="First Name" th:field="*{lastname}" class="form-control" required="required"/><br/>
 		        <label>Şehir</label>
-		        <input type="text" id="city" placeholder=" Email" th:field="*{city}" class="form-control"/><br/>
-		
+		        <input type="text" id="city" placeholder=" Email" th:field="*{city}" class="form-control" required="required"/><br/>
 		        <label>Email</label>
-		        <input type="email" id="email" placeholder=" Email" th:field="*{email}" class="form-control"/><br/>
-		        
+		        <input type="email" id="email" placeholder=" Email" th:field="*{email}" class="form-control" required="required"/><br/>
 		        <button type="submit" class="btn btn-primary text-center form-control">Kaydet</button>
 		    </form>
     		<div class="margin-top20 text-center"><a th:href="@{/customers}">Müşterileri Gör</a></div>
 		</div>
-		
-		
 	</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

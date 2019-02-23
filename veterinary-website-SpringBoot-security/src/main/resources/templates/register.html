@@ -4,11 +4,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 </head>
-
 <body>
-
 <div class="container">
 	<div class="row">
 		<div lang="tr" th:replace="fragments/header :: header" ></div>
@@ -20,7 +17,6 @@
 		<div class="col-md-6">
 			<img alt=""  class="img-thumbnail " src="https://www.bukrek.com/images/veteriner-gunu.jpg">
 		</div>
-
 		<div class="col-md-6" >
 			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
 				<strong th:text="${message}"></strong> 
@@ -28,22 +24,19 @@
 				<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
+			<div th:unless="${message}">
 		    <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
-
 		        <label>Kullanıcı Adınız </label>
-		        <input type="text" id="firstName" placeholder="First Name" th:field="*{username}" class="form-control"/><br/>
-		
+		        <input type="text" id="firstName" placeholder="First Name" th:field="*{username}" class="form-control" required="required"/><br/>
 		        <label>Eposta</label>
-		        <input type="text" id="email" placeholder=" Email" th:field="*{email}" class="form-control"/><br/>
-		
+		        <input type="text" id="email" placeholder=" Email" th:field="*{email}" class="form-control" required="required"/><br/>
 		        <label>Parolanız </label>
-		        <input type="text" id="password" placeholder=" Password" th:field="*{password}" class="form-control"/><br/>
-		
+		        <input type="text" id="password" placeholder=" Password" th:field="*{password}" class="form-control" required="required"/><br/>
 		        <button type="submit" class="btn btn-primary text-center form-control">Kaydet</button>
 		    </form>
+		    </div>
     		<div class="margin-top20 text-center"><a th:href="@{/login}">Giriş Sayfasına Git</a></div>
 		</div>
-		
 	</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

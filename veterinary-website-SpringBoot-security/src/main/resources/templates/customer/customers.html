@@ -4,7 +4,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 </head>
 <body>
 	<div class="container">
@@ -20,9 +19,7 @@
 			<a href="/logout" class="btn btn-danger">Çıkış Yapın</a>
 		    <hr>	
 		</div>
-
 		<div class="col-md-12">				
-
 			<h1 class="h3 mb-3 font-weight-normal">Müşteriler Bölümü</h1>
 		    <hr>
 		    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
@@ -52,7 +49,6 @@
 						<td th:text="${customer.getCity()}"></td>
 						<td th:text="${customer.getEmail() }"></td>
 						<td>
-						
 							<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
 							<a th:href="@{'/customers/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
 							<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm">Sil</a>

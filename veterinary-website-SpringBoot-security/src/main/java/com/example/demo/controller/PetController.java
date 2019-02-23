@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -30,53 +31,40 @@ public class PetController {
 
 	@Autowired
 	PetRepository petRepository;
-	
-	@RequestMapping(value="/insert-pet/{customerid}",method = RequestMethod.POST)
-	public String InsertPet(@PathVariable int customerid, Map<String, Object> map,@Valid @ModelAttribute("pet") Pet pet , BindingResult result, Model model) {
-		Customer customer = customerRepository.findById(customerid).get();
 
-		if (result.hasErrors()) {
-			
+
+	@RequestMapping(value = "/delete-pet/{pet_id}", method = RequestMethod.GET)
+	public String DeletePet(@PathVariable long pet_id, Map<String, Object> map, @Valid @ModelAttribute("pet") Pet pet,
+			BindingResult result, Model model) throws SQLException {
+
+
+
+		try {
+			Pet selected_pet = petRepository.findById(pet_id).get();
+			int customerid = selected_pet.getCustomer().getCustomerid();
+			selected_pet.setCustomer(null);
+			if (result.hasErrors()) {
+				return "customer/show-customer";
+			} else {
+				petRepository.delete(selected_pet);
+			}
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			map.put("adminname", auth.getName());
+			Customer customer = customerRepository.findById(customerid).get();
+			List<Pet> pets = petRepository.findByCustomer(customer);
+			map.put("customer", customer);
+			map.put("pets", pets);
+			map.put("message", "Kayıt silinmiştir.");
 			return "customer/show-customer";
-		} else {
-			
-			pet.setCustomer(customer);
-			petRepository.save(pet);
+		} catch (Exception e) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			map.put("adminname", auth.getName());
+			List<Customer> customers = customerRepository.findAll();
+			map.put("customers", customers);
+			map.put("message","Kayıt bulunamamıştır.");
+			return "customer/customers";
 		}
-		List<Pet> pets=petRepository.findByCustomer(customer);
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		map.put("adminname", auth.getName());
-		map.put("customer", customer);
-		map.put("pets", pets);
-		map.put("message", "Kayıt işlemi başarılı");
-		//return "redirect:/customers/show-customer/"+customerid;
-		return "customer/show-customer";
+
 	}
 
-	
-	@RequestMapping(value="/delete-pet/{pet_id}",method = RequestMethod.GET)
-	public String DeletePet(@PathVariable long pet_id, Map<String, Object> map,@Valid @ModelAttribute("pet") Pet pet , BindingResult result, Model model) {
-
-		Pet selected_pet = petRepository.findById(pet_id).get();
-		int customerid=selected_pet.getCustomer().getCustomerid();
-		selected_pet.setCustomer(null);
-		if (result.hasErrors()) {
-			
-			return "customer/show-customer";
-		} else {
-			petRepository.delete(selected_pet);
-			
-		}
-		Customer customer=customerRepository.findById(customerid).get();
-		
-		List<Pet> pets=petRepository.findByCustomer(customer);
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		map.put("adminname", auth.getName());
-		map.put("customer", customer);
-		map.put("pets", pets);
-		map.put("message", "Kayıt silinmiştir.");
-		return "customer/show-customer";
-	}
-	
-	
 }
