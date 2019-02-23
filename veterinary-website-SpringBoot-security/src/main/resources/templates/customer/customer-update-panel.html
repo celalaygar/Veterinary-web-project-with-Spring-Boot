@@ -14,7 +14,7 @@
 		<div lang="tr" th:replace="fragments/header :: header" ></div>
 		<div class="col-md-12">
 		    <hr>	
-			<h1 class="h3 mb-3 font-weight-normal"><span class="badge badge-info">Müşteri Kayıt Bölümü</span></h1>	  
+			<h1 class="h3 mb-3 font-weight-normal"><span class="badge badge-info">Müşteri Güncelleme Bölüm</span></h1>	  
 		    <hr>
 		</div>
 		<div class="col-md-12">
@@ -29,7 +29,7 @@
 
 
 		<div class="col-md-6" style="border:3px solid #ddd">
-			<h1 class="h3 mb-3 font-weight-normal">Müşteri Kayıt Bölümü</h1>
+			<h1 class="h3 mb-3 font-weight-normal">Müşteri Güncelleme Bölümü</h1>
 		    <hr>	
 			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
 				<strong th:text="${message}"></strong> 
@@ -37,8 +37,8 @@
 				<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-		    <form autocomplete="off" action="#" th:action="@{/customers/insert-customer}" th:object="${customer}" method="post">
-
+		    <form autocomplete="off" action="#" th:action="@{/customers/update-customer}" th:object="${customer}" method="post">
+				<input type="hidden" th:value="${customerid}" th:field="*{customerid}" />
 		        <label>Müşteri Adı </label>
 		        <input type="text" id="firstName" placeholder="First Name" th:field="*{firstname}" class="form-control"/><br/>
 		
@@ -51,7 +51,7 @@
 		        <label>Email</label>
 		        <input type="email" id="email" placeholder=" Email" th:field="*{email}" class="form-control"/><br/>
 		        
-		        <button type="submit" class="btn btn-primary text-center form-control">Kaydet</button>
+		        <button type="submit" class="btn btn-primary text-center form-control">Güncelle</button>
 		    </form>
     		<div class="margin-top20 text-center"><a th:href="@{/customers}">Müşterileri Gör</a></div>
 		</div>

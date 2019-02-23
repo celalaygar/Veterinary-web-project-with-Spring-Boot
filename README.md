@@ -16,7 +16,7 @@
 - Thymeleaf
 - Bootstrap
 ``` 
-- This sql query is not completely correct.
+- This sql query is not completely correct sql query below.
 - You had better to look at this applicaton.properties pls. Database's table can be generated automatically, 
 İf you write `spring.jpa.hibernate.ddl-auto=create` on application.properties.
 ``` 
