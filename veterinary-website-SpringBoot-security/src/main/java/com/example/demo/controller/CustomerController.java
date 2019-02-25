@@ -39,6 +39,7 @@ public class CustomerController {
 	public String getAllCustomers(Map<String, Object> map) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		List<Customer> customers = customerRepository.findAll();
+		map.put("title", "Müşteriler");
 		map.put("adminname", auth.getName());
 		map.put("customers", customers);
 		return "customer/customers";
@@ -47,6 +48,7 @@ public class CustomerController {
 	@RequestMapping(value = "/insert-customer", method = RequestMethod.GET)
 	public String CustomerRegisterPanel(Map<String, Object> map) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("title", "Müşteri Ekleme Bölümü");
 		map.put("adminname", auth.getName());
 		map.put("customer", new Customer());
 		return "customer/customer-insert-panel";
@@ -58,6 +60,7 @@ public class CustomerController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		map.put("adminname", auth.getName());
 		map.put("customer", new Customer());
+		map.put("title", "Müşteri Ekleme Bölümü");
 		if (result.hasErrors()) {
 			return "customer-insert-panel";
 		} else {
@@ -76,6 +79,7 @@ public class CustomerController {
 		try {
 			Customer customer = customerRepository.findById(customerid).get();
 			List<Pet> pets = petRepository.findByCustomer(customer);
+			map.put("title", "Müşteri Detayları");
 			map.put("customer", customer);
 			map.put("pet", new Pet());
 			map.put("pets", pets);
@@ -83,6 +87,7 @@ public class CustomerController {
 			return "customer/show-customer";
 		} catch (Exception e) {
 			List<Customer> customers = customerRepository.findAll();
+			map.put("title", "Müşteriler");
 			map.put("customers", customers);
 			map.put("message", " Kayıt bulunamamıştır.");
 			return "customer/customers";
@@ -98,11 +103,13 @@ public class CustomerController {
 
 		try {
 			Customer customer = customerRepository.findById(customerid).get();
+			map.put("title", "Müşteri Güncelleme Bölümü");
 			map.put("customer", customer);
 			map.put("pet", new Pet());
 			return "customer/customer-update-panel";
 		} catch (Exception e) {
 			List<Customer> customers = customerRepository.findAll();
+			map.put("title", "Müşteriler");
 			map.put("customers", customers);
 			map.put("message", " Kayıt bulunamamıştır.");
 			return "customer/customers";
@@ -116,12 +123,14 @@ public class CustomerController {
 		map.put("adminname", auth.getName());
 		map.put("customer", new Customer());
 		if (result.hasErrors()) {
+			map.put("title", "Müşteri Ekle");
 			return "customer-insert-panel";
 		} else {
 			customerRepository.save(customer);
 		}
 		List<Customer> customers = customerRepository.findAll();
 		map.put("message", "Kayıt güncelleme işlemi başarlı.");
+		map.put("title", "Müşteriler");
 		map.put("adminname", auth.getName());
 		map.put("customers", customers);
 		return "customer/customers";
@@ -135,18 +144,18 @@ public class CustomerController {
 		map.put("adminname", auth.getName());
 		try {
 			Customer customer = customerRepository.findById(customerid).get();
+			petRepository.deleteAll(customer.getPets());
 			customerRepository.delete(customer);
-
-			List<Customer> customers = customerRepository.findAll();
-			map.put("customers", customers);
 			map.put("message", "Kayıt silinmiştir.");
-			return "customer/customers";
+
 		} catch (Exception e) {
-			List<Customer> customers = customerRepository.findAll();
-			map.put("customers", customers);
 			map.put("message", " Kayıt bulunamamıştır.");
-			return "customer/customers";
 		}
+
+		List<Customer> customers = customerRepository.findAll();
+		map.put("title", "Müşteriler");
+		map.put("customers", customers);
+		return "customer/customers";
 	}
 
 	@RequestMapping(value = "/insert-pet/{customerid}", method = RequestMethod.POST)
@@ -166,6 +175,7 @@ public class CustomerController {
 				petRepository.save(pet);
 			}
 			List<Pet> pets = petRepository.findByCustomer(customer);
+			map.put("title", "Müşteri Detayları");
 			map.put("customer", customer);
 			map.put("pets", pets);
 			map.put("message", "Kayıt işlemi başarılı");
@@ -183,6 +193,7 @@ public class CustomerController {
 				return "customer/show-customer";
 			} catch (Exception e) {
 				List<Customer> customers = customerRepository.findAll();
+				map.put("title", "Müşteriler");
 				map.put("customers", customers);
 				map.put("message", " Kayıt bulunamamıştır.");
 				return "customer/customers";

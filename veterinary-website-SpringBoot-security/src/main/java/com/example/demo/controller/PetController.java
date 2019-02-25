@@ -37,7 +37,7 @@ public class PetController {
 	public String DeletePet(@PathVariable long pet_id, Map<String, Object> map, @Valid @ModelAttribute("pet") Pet pet,
 			BindingResult result, Model model) throws SQLException {
 
-
+		
 
 		try {
 			Pet selected_pet = petRepository.findById(pet_id).get();
@@ -52,6 +52,7 @@ public class PetController {
 			map.put("adminname", auth.getName());
 			Customer customer = customerRepository.findById(customerid).get();
 			List<Pet> pets = petRepository.findByCustomer(customer);
+			map.put("title", "Müşteri Detayları");
 			map.put("customer", customer);
 			map.put("pets", pets);
 			map.put("message", "Kayıt silinmiştir.");
@@ -60,6 +61,7 @@ public class PetController {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			map.put("adminname", auth.getName());
 			List<Customer> customers = customerRepository.findAll();
+			map.put("title", "Müşteriler");
 			map.put("customers", customers);
 			map.put("message","Kayıt bulunamamıştır.");
 			return "customer/customers";
