@@ -31,17 +31,15 @@
 				</div>
 			</nav>
 			<div class="col-md-12 row" th:fragment="title">
-			    
-			    <div class="col-md-6" >
+			    <div class="col-md-8" >
 			    <hr>
 				<h1 class="h3 mb-3 font-weight-normal"><span class="badge badge-info" th:text="${title}">></span></h1>
-				<hr>
+				
 				</div>
-				<div class="col-md-6" th:if="${adminname}">
+				<div class="col-md-4" th:if="${adminname}">
 				<hr>
 					<span style="font-size: 18px" class="badge badge-info" th:text="'Doktor Adı : ' + ${adminname}"></span>
 					<a href="/logout" class="btn btn-danger">Çıkış Yapın</a>
-					<hr>
 				</div>
 			</div>
 

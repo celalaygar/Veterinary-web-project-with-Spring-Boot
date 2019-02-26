@@ -10,10 +10,7 @@
 		<div class="row">
 			<div lang="tr" th:replace="fragments/header :: header"></div> 
 			<div lang="tr" th:replace="fragments/header :: title"></div>
-
-			<div class="col-md-12">				
-				<h1 class="h3 mb-3 font-weight-normal">Müşteriler Bölümü</h1>
-			    <hr>
+			<div class="col-md-12">
 			    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
 					<strong th:text="${message}"></strong> 
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">

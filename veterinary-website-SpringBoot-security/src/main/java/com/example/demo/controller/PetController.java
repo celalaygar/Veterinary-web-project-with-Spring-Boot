@@ -37,8 +37,6 @@ public class PetController {
 	public String DeletePet(@PathVariable long pet_id, Map<String, Object> map, @Valid @ModelAttribute("pet") Pet pet,
 			BindingResult result, Model model) throws SQLException {
 
-		
-
 		try {
 			Pet selected_pet = petRepository.findById(pet_id).get();
 			int customerid = selected_pet.getCustomer().getCustomerid();
