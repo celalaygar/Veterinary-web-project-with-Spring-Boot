@@ -10,12 +10,7 @@
 	<div class="row">
 		<div lang="tr" th:replace="fragments/header :: header"></div> 
 		<div lang="tr" th:replace="fragments/header :: title"></div>
-		<div class="col-md-12" th:if="${adminname}">
-		    <hr>
-			<span style="font-size: 18px" class="badge badge-info" th:text="'Doktor Adı : ' + ${adminname}"></span>
-			<a href="/logout" class="btn btn-danger">Çıkış Yapın</a>
-		    <hr>	
-		</div>
+
 		<div class="col-md-6">
 			<img alt=""  class="img-thumbnail " src="https://www.bukrek.com/images/veteriner-gunu.jpg">
 		</div>		

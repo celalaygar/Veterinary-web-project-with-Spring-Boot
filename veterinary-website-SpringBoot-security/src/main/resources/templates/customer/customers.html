@@ -10,12 +10,7 @@
 		<div class="row">
 			<div lang="tr" th:replace="fragments/header :: header"></div> 
 			<div lang="tr" th:replace="fragments/header :: title"></div>
-			<div class="col-md-12" th:if="${adminname}">
-			    <hr>
-				<span style="font-size: 18px" class="badge badge-info" th:text="'Doktor Adı : ' + ${adminname}"></span>
-				<a href="/logout" class="btn btn-danger">Çıkış Yapın</a>
-			    <hr>	
-			</div>
+
 			<div class="col-md-12">				
 				<h1 class="h3 mb-3 font-weight-normal">Müşteriler Bölümü</h1>
 			    <hr>
@@ -48,7 +43,8 @@
 							<td>
 								<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
 								<a th:href="@{'/customers/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
-								<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm">Sil</a>
+								<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm" 
+									onclick="return confirm('Are you sure you want to delete this item?');">Sil</a>
 							</td>
 						</tr>
 					</tbody>

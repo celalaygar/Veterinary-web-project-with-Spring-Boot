@@ -10,12 +10,6 @@
 		<div class="row">
 			<div lang="tr" th:replace="fragments/header :: header"></div> 
 			<div lang="tr" th:replace="fragments/header :: title"></div>
-			<div class="col-md-12" th:if="${adminname}">
-			    <hr>
-				<span style="font-size: 18px" class="badge badge-info" th:text="'Doktor Adı : ' + ${adminname}"></span>
-				<a href="/logout" class="btn btn-danger">Çıkış Yapın</a>
-			    <hr>	
-			</div>
 			<div class="col-md-12"></div>
 			<div class="col-md-4"  >
 				<div class="card" style="width: 18rem;">
@@ -31,7 +25,8 @@
 					<div class="card-body">
 						<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
 						<a th:href="@{'/customers/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
-						<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm">Sil</a>
+						<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm"
+						onclick="return confirm('Are you sure you want to delete this item?');" >Sil</a>
 					</div>
 				</div>
 			</div>
@@ -63,7 +58,7 @@
 						<tr>
 							<th scope="col">Tipi</th>
 							<th scope="col">ismi</th>
-							<th scope="col">problemi</th>
+							<th scope="col">Sağlık Problemi</th>
 							<th scope="col">İşlemler</th>
 						</tr>
 					</thead>
@@ -73,7 +68,8 @@
 							<td th:text="${singlePet.getName()}"></td>
 							<td th:text="${singlePet.getProblem()}"></td>
 							<td>
-								<a th:href="@{'/pets/delete-pet/' + ${singlePet.getId()}}" class="btn btn-warning btn-sm">Sil</a>
+								<a th:href="@{'/pets/delete-pet/' + ${singlePet.getId()}}" class="btn btn-warning btn-sm" 
+									onclick="return confirm('Are you sure you want to delete this item?');" >Sil</a>
 							</td>
 						</tr>
 					</tbody>
