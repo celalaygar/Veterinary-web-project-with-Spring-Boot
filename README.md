@@ -1,12 +1,7 @@
-### veterinary-web-project with spring boot and security
+## Veterinary web project with Spring Boot and Spring Security
 - How to use registering and login on spring boot and security with mysql.
-- How to use login and register on this project.
 - How to use insert customer and a lot of pets depending to customer on this project.
 - How to use CRUD for user, customer and pets on this project.
-- You had better to look at this applicaton.properties pls. Database's table can be generated automatically, İf you write `spring.jpa.hibernate.ddl-auto=create` on application.properties.
-- Your database's table can create regularly when you wrote `spring.jpa.hibernate.ddl-auto=create` on application.properties.
-- if you wanna to watch the video as result of this project, you can click and watch on youtube
-
 ##### Using Tools & Technologies
 ``` 
 - Spring Boot
@@ -16,9 +11,9 @@
 - Thymeleaf
 - Bootstrap
 ``` 
-- This sql query is not completely correct sql query below.
-- You had better to look at this applicaton.properties pls. Database's table can be generated automatically, 
-İf you write `spring.jpa.hibernate.ddl-auto=create` on application.properties.
+#### This sql query is not completely correct sql query below.
+- You had better to look at this applicaton.properties pls. Database's table can be generated automatically, İf you write `spring.jpa.hibernate.ddl-auto=create` on application.properties.
+- Your database's table can create regularly when you wrote `spring.jpa.hibernate.ddl-auto=create` on application.properties.
 ``` 
 CREATE TABLE user(
     user_id INTEGER PRIMARY KEY  NOT NULL,
