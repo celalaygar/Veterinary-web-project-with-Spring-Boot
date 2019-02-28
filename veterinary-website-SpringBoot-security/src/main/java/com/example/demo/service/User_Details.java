@@ -20,6 +20,8 @@ public class User_Details implements UserDetails {
 
 	}
 
+	
+	
 	@Override
 	public String getPassword() {
 		return user.getPassword();
@@ -27,7 +29,7 @@ public class User_Details implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return user.getUsername();
+		return user.getEmail();
 	}
 
 	@Override

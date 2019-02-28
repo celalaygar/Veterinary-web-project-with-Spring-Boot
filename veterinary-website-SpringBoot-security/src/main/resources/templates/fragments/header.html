@@ -31,15 +31,25 @@
 				</div>
 			</nav>
 			<div class="col-md-12 row" th:fragment="title">
-			    <div class="col-md-8" >
-			    <hr>
-				<h1 class="h3 mb-3 font-weight-normal"><span class="badge badge-info" th:text="${title}">></span></h1>
-				
-				</div>
-				<div class="col-md-4" th:if="${adminname}">
-				<hr>
-					<span style="font-size: 18px" class="badge badge-info" th:text="'Doktor Adı : ' + ${adminname}"></span>
-					<a href="/logout" class="btn btn-danger">Çıkış Yapın</a>
+			    <div class="col-md-10" >
+				    <hr>
+					<h1 class="h3 mb-3 font-weight-normal"><span class="badge badge-info" th:text="${title}">></span></h1>
+					</div>
+				<div class="col-md-2" th:if="${adminname}">
+					<hr>
+					
+					<div class="btn-group" role="group">
+						<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" 
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${adminname}">
+						
+						</button>
+						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+							<a class="dropdown-item" href="#">Göster</a>
+							<a class="dropdown-item" href="#">Güncelle</a>
+							<a href="/logout" class="dropdown-item">Çıkış Yapın</a>
+						</div>
+					</div>
+
 				</div>
 			</div>
 
