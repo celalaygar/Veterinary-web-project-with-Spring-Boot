@@ -24,7 +24,7 @@ public class Customer {
 	private String email;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private Set<Pet> pets;
 
 	public int getCustomerid() {

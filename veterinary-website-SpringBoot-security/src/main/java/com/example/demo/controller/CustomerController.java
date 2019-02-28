@@ -145,6 +145,7 @@ public class CustomerController {
 		try {
 			Customer customer = customerRepository.findById(customerid).get();
 			petRepository.deleteAll(customer.getPets());
+			customer.setPets(null);
 			customerRepository.delete(customer);
 			map.put("message", "Kayıt silinmiştir.");
 

@@ -36,18 +36,18 @@ public class PetController {
 	@RequestMapping(value = "/delete-pet/{pet_id}", method = RequestMethod.GET)
 	public String DeletePet(@PathVariable long pet_id, Map<String, Object> map, @Valid @ModelAttribute("pet") Pet pet,
 			BindingResult result, Model model) throws SQLException {
-
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("adminname", auth.getName());
 		try {
+			
 			Pet selected_pet = petRepository.findById(pet_id).get();
 			int customerid = selected_pet.getCustomer().getCustomerid();
+			System.out.println(customerid+" -------------------------------------- ");
+			System.out.println(selected_pet.getName()+" "+selected_pet.getProblem()+" -------------------------------------- ");
 			selected_pet.setCustomer(null);
-			if (result.hasErrors()) {
-				return "customer/show-customer";
-			} else {
-				petRepository.delete(selected_pet);
-			}
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			map.put("adminname", auth.getName());
+			petRepository.delete(selected_pet);
+			
+			
 			Customer customer = customerRepository.findById(customerid).get();
 			List<Pet> pets = petRepository.findByCustomer(customer);
 			map.put("title", "Müşteri Detayları");
@@ -55,9 +55,10 @@ public class PetController {
 			map.put("pets", pets);
 			map.put("message", "Kayıt silinmiştir.");
 			return "customer/show-customer";
+
+
 		} catch (Exception e) {
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			map.put("adminname", auth.getName());
+
 			List<Customer> customers = customerRepository.findAll();
 			map.put("title", "Müşteriler");
 			map.put("customers", customers);

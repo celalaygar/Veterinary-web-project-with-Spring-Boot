@@ -20,7 +20,7 @@ public class Pet {
 	private String problem;
 	
 	@JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customerid")
 	public Customer customer;
 
