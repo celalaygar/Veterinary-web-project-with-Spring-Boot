@@ -30,8 +30,6 @@ import com.example.demo.repository.UserRepository;
 @Controller
 public class MainController {
 
-
-
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -66,6 +64,7 @@ public class MainController {
 		model.addAttribute("user", new User());
 		return "register";
 	}
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String saveRegisterPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model,
 			Map<String, Object> map)  throws SQLException {
@@ -73,6 +72,7 @@ public class MainController {
 		map.put("title", "Doktor Kayıt Sayfası");
 		model.addAttribute("user", user);
 		List<User> user_control=userRepository.getUserByEmail(user.getEmail());
+		System.out.println(user.getGender()+" ----------------------------------------------------------");
 		// to control whether there is user with this email
 		if(user_control.size()>0) {
 			map.put("message", "Bu email adresi mevcuttur...");

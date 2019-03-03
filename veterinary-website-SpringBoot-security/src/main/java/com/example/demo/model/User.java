@@ -17,7 +17,34 @@ public class User {
 	private int user_id;
 	
 	private String username;
+	private String firstname;
+	private String lastname;
+	private String gender;
 	private String password;
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	@Column(name="email")
 	private String email;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

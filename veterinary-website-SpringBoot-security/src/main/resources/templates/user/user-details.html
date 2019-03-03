@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Veteriner Uygulaması</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div lang="tr" th:replace="fragments/header :: header"></div> 
+			<div lang="tr" th:replace="fragments/header :: title"></div>
+			<div class="col-md-12"></div>
+			<div class="col-md-12"  th:if="${message}" >
+				<div class="alert alert-warning alert-dismissible fade show" role="alert" >
+					<strong th:text="${message}"></strong> 
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<img alt="" class="img-thumbnail "
+					src="https://img-s1.onedio.com/id-5b3a2a0b457511730e6f787e/rev-0/raw/s-1df81c8d8203e9d6d42b7a8a112f1a234afb02c0.jpg">
+			</div>
+			<div class="col-md-6"  th:if="${user}">
+				<ul class="list-group" style="font-weight: bold">
+					<li class="list-group-item active" ><h5 style="text-align: center;margin: auto;">Doktor Bilgileri</h5></li>
+					<li class="list-group-item" th:text="'Kullanıcı adı : '+${user.getUsername()}"></li>
+					<li class="list-group-item" th:text="'İsim : '+${user.getFirstname()}"></li>
+					<li class="list-group-item" th:text="'Soyisim : '+${user.getLastname()}"></li>
+					<li class="list-group-item" th:text="'Email : '+${user.getEmail()}"></li>
+					<li class="list-group-item" th:text="'Cinsiyet : '+${user.getGender()}"></li>
+
+				</ul>
+				<hr>
+				<div class="margin-top20 text-center">
+					<a class="btn btn-info" th:href="@{'/users/update-user/' + ${adminname}}">Güncelle</a>
+					<a class="btn btn-danger" th:href="@{'/users/delete-user/' + ${adminname}}">Sil</a>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	
+	<div lang="tr" th:replace="fragments/header :: jsfile"></div>
+	</body>
+</html>
