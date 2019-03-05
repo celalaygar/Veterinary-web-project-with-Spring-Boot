@@ -72,7 +72,6 @@ public class MainController {
 		map.put("title", "Doktor Kayıt Sayfası");
 		model.addAttribute("user", user);
 		List<User> user_control=userRepository.getUserByEmail(user.getEmail());
-		System.out.println(user.getGender()+" ----------------------------------------------------------");
 		// to control whether there is user with this email
 		if(user_control.size()>0) {
 			map.put("message", "Bu email adresi mevcuttur...");
