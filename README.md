@@ -19,6 +19,7 @@ CREATE TABLE user(
     user_id INTEGER PRIMARY KEY  NOT NULL,
     username VARCHAR(20),
     password VARCHAR(20),
+	reel_password VARCHAR(20),
     city VARCHAR(20),
     email VARCHAR(20)
 );
@@ -36,6 +37,7 @@ CREATE TABLE customer(
     customerid INTEGER PRIMARY KEY  NOT NULL,
     firstname VARCHAR(20),
     lastname VARCHAR(20),
+    phone_number VARCHAR(20),
     city VARCHAR(20),
     email VARCHAR(20)
 );
@@ -44,6 +46,7 @@ CREATE TABLE pet(
     id INTEGER PRIMARY KEY  NOT NULL,
     type VARCHAR(20),
     name VARCHAR(20),
+    age VARCHAR(20),
     problem VARCHAR(20),
     customerid INTEGER NOT NULL
 );
