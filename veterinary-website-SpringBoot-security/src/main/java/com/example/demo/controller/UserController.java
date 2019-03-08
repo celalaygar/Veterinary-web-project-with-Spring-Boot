@@ -143,10 +143,10 @@ public class UserController {
 				users.get(0).setReel_password(request.getParameter("password"));
 				users.get(0).setPassword(passwordEncoder.encode(request.getParameter("password")));
 				userRepository.save(users.get(0));
-				map.put("message", "Mevcut şifrenizi yanlış girdiniz.");
+				map.put("message", " Şifreniz başarıyla güncellenmiştir..");
 				return "redirect:/logout";
 			}else {
-				map.put("message", "Mevcut şifreniz doğru değildir..");
+				map.put("message", "Mevcut şifrenizi yanlış girdiniz.");
 			}
 		}else {
 			map.put("message", "Mevcut şifreler uyuşmuyor.");

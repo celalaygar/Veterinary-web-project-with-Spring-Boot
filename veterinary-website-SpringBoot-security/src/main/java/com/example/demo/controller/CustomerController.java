@@ -48,13 +48,11 @@ public class CustomerController {
 
 	@RequestMapping(value = "/get-customers", method = RequestMethod.GET)
 	public String getAnyCustomers(@RequestParam("name") String name,Map<String, Object> map) {
-		System.out.println(name+" ----------------------------------- ");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		map.put("title", "Müşteriler");
 		map.put("adminname", auth.getName());
 		List<Customer> customers=null;
 		customers = customerRepository.findByFirstname(name);
-		System.out.println(name+" ----------------------------------- ");
 		
 		//control whether there is any customer having this firstname called name
 		if(customers.size()>0) {
@@ -62,12 +60,10 @@ public class CustomerController {
 		}else {
 			//control whether there is any customer having this lastname called name
 			customers = customerRepository.findByLastname(name);
-			System.out.println(customers.size()+" "+name+" ----------------------------------- ");
 			if(customers.size()>0) {
 				map.put("customers", customers);
 			}else {
 				customers = customerRepository.findAll();
-				System.out.println(customers.size()+" "+name+" ----------------------------------- ");
 				map.put("customers", customers);
 				map.put("message", " Kayıt bulunamamıştır.");
 			}
