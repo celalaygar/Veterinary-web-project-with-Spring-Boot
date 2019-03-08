@@ -21,6 +21,7 @@
 				<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
+			<h5 style="text-align: center;margin: auto;" class="list-group-item active" >Bilgileri Güncelle</h5><hr>
 		    <form autocomplete="off" action="#" th:action="@{/users/update-user/}" th:object="${user}" method="post">
 		   		<input type="hidden" th:value="${user_id}" th:field="*{user_id}" />
 		        <label>Kullanıcı Adı</label>

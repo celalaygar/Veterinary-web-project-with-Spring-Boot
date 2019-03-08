@@ -21,15 +21,16 @@
 		        Kullanıcı Adı veya Şifre yanlış.
 		    </div>
 		    <form th:action="@{/login}" method="post">
-		        <label>Kullanıcı Adınız</label>
-		        <input type="text" name="username" class="form-control"/>
+		        <label>Email </label>
+		        <input type="email" name="username" class="form-control" placeholder="Email giriniz."/>
 		        <label>Şifreniz</label>
-		        <input type="password" id="password" name="password" class="form-control"/>
+		        <input type="password" id="password" name="password" class="form-control" placeholder="Şifre giriniz."/>
 		        <br/>
 		        <button class="btn btn-primary text-center form-control" type="submit">Giriş Yap</button>
 		        <br/>
 		        <br/>
 		        <div class="margin-top20 text-center"><a th:href="@{/register}">Üye Olma Sayfasına Git</a>
+	        	<hr>
 		        </div>
 		    </form>
 		</div>

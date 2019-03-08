@@ -140,15 +140,16 @@ public class UserController {
 			boolean control=passwordEncoder.matches( request.getParameter("oldpassword1"),users.get(0).getPassword());
 			if(control) {
 				//changing password
+				users.get(0).setReel_password(request.getParameter("password"));
 				users.get(0).setPassword(passwordEncoder.encode(request.getParameter("password")));
 				userRepository.save(users.get(0));
-				map.put("message", " Şifreniz başarıyla güncellenmiştir..");
+				map.put("message", "Mevcut şifrenizi yanlış girdiniz.");
 				return "redirect:/logout";
 			}else {
-				map.put("message", " Girilen Şifreler hatalıdır.");
+				map.put("message", "Mevcut şifreniz doğru değildir..");
 			}
 		}else {
-			map.put("message", " Girilen Şifreler uyuşmuyor.");
+			map.put("message", "Mevcut şifreler uyuşmuyor.");
 		}
 		return "user/user-details";
 	}

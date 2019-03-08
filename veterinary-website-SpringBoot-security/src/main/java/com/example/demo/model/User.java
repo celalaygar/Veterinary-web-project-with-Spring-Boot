@@ -21,6 +21,15 @@ public class User {
 	private String lastname;
 	private String gender;
 	private String password;
+	private String reel_password;
+	public String getReel_password() {
+		return reel_password;
+	}
+
+	public void setReel_password(String reel_password) {
+		this.reel_password = reel_password;
+	}
+
 	public String getFirstname() {
 		return firstname;
 	}

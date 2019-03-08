@@ -88,6 +88,7 @@ public class MainController {
 						add(role);
 					}
 				});
+				user.setReel_password(user.getPassword());
 				String pwd = user.getPassword();
 				String encryptPwd = passwordEncoder.encode(pwd);
 				user.setPassword(encryptPwd);

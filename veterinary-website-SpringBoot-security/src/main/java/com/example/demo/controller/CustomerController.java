@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.Customer;
@@ -45,6 +46,35 @@ public class CustomerController {
 		return "customer/customers";
 	}
 
+	@RequestMapping(value = "/get-customers", method = RequestMethod.GET)
+	public String getAnyCustomers(@RequestParam("name") String name,Map<String, Object> map) {
+		System.out.println(name+" ----------------------------------- ");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("title", "Müşteriler");
+		map.put("adminname", auth.getName());
+		List<Customer> customers=null;
+		customers = customerRepository.findByFirstname(name);
+		System.out.println(name+" ----------------------------------- ");
+		
+		//control whether there is any customer having this firstname called name
+		if(customers.size()>0) {
+			map.put("customers", customers);
+		}else {
+			//control whether there is any customer having this lastname called name
+			customers = customerRepository.findByLastname(name);
+			System.out.println(customers.size()+" "+name+" ----------------------------------- ");
+			if(customers.size()>0) {
+				map.put("customers", customers);
+			}else {
+				customers = customerRepository.findAll();
+				System.out.println(customers.size()+" "+name+" ----------------------------------- ");
+				map.put("customers", customers);
+				map.put("message", " Kayıt bulunamamıştır.");
+			}
+		}
+		return "customer/customers";
+	}
+	
 	@RequestMapping(value = "/insert-customer", method = RequestMethod.GET)
 	public String CustomerRegisterPanel(Map<String, Object> map) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -95,6 +125,52 @@ public class CustomerController {
 		
 	}
 
+	@RequestMapping(value = "/insert-pet/{customerid}", method = RequestMethod.POST)
+	public String InsertPet(@PathVariable int customerid, Map<String, Object> map,
+			@Valid @ModelAttribute("pet") Pet pet, BindingResult result, Model model)  throws SQLException {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("adminname", auth.getName());
+		if (!pet.getType().equals("") || !pet.getName().equals("") || !pet.getProblem().equals("") ) {
+			Customer customer = customerRepository.findById(customerid).get();
+			if (result.hasErrors()) {
+
+				return "customer/show-customer";
+			} else {
+
+				pet.setCustomer(customer);
+				petRepository.save(pet);
+			}
+			List<Pet> pets = petRepository.findByCustomer(customer);
+			map.put("title", "Müşteri Detayları");
+			map.put("customer", customer);
+			map.put("pet", new Pet());
+			map.put("pets", pets);
+			map.put("message", "Kayıt işlemi başarılı");
+			// return "redirect:/customers/show-customer/"+customerid;
+			return "customer/show-customer";
+		} else {
+
+			try {
+				Customer customer = customerRepository.findById(customerid).get();
+				List<Pet> pets = petRepository.findByCustomer(customer);
+				map.put("customer", customer);
+				map.put("pet", new Pet());
+				map.put("pets", pets);
+
+				return "customer/show-customer";
+			} catch (Exception e) {
+				List<Customer> customers = customerRepository.findAll();
+				map.put("title", "Müşteriler");
+				map.put("customers", customers);
+				map.put("message", " Kayıt bulunamamıştır.");
+				return "customer/customers";
+			}
+		}
+	}
+
+
+	
 	@RequestMapping(value = "/update-customer/{customerid}", method = RequestMethod.GET)
 	public String CustomerUpdatePanel(@PathVariable int customerid, Map<String, Object> map)  throws SQLException {
 
@@ -157,49 +233,6 @@ public class CustomerController {
 		map.put("title", "Müşteriler");
 		map.put("customers", customers);
 		return "customer/customers";
-	}
-
-	@RequestMapping(value = "/insert-pet/{customerid}", method = RequestMethod.POST)
-	public String InsertPet(@PathVariable int customerid, Map<String, Object> map,
-			@Valid @ModelAttribute("pet") Pet pet, BindingResult result, Model model)  throws SQLException {
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		map.put("adminname", auth.getName());
-		if (!pet.getType().equals("") || !pet.getName().equals("") || !pet.getProblem().equals("") ) {
-			Customer customer = customerRepository.findById(customerid).get();
-			if (result.hasErrors()) {
-
-				return "customer/show-customer";
-			} else {
-
-				pet.setCustomer(customer);
-				petRepository.save(pet);
-			}
-			List<Pet> pets = petRepository.findByCustomer(customer);
-			map.put("title", "Müşteri Detayları");
-			map.put("customer", customer);
-			map.put("pets", pets);
-			map.put("message", "Kayıt işlemi başarılı");
-			// return "redirect:/customers/show-customer/"+customerid;
-			return "customer/show-customer";
-		} else {
-
-			try {
-				Customer customer = customerRepository.findById(customerid).get();
-				List<Pet> pets = petRepository.findByCustomer(customer);
-				map.put("customer", customer);
-				map.put("pet", new Pet());
-				map.put("pets", pets);
-
-				return "customer/show-customer";
-			} catch (Exception e) {
-				List<Customer> customers = customerRepository.findAll();
-				map.put("title", "Müşteriler");
-				map.put("customers", customers);
-				map.put("message", " Kayıt bulunamamıştır.");
-				return "customer/customers";
-			}
-		}
 	}
 
 
