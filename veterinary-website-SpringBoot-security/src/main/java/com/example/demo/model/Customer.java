@@ -22,7 +22,16 @@ public class Customer {
 	private String lastname;
 	private String city;
 	private String email;
+	private String phone_number;
 	
+	public String getPhone_number() {
+		return phone_number;
+	}
+
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private Set<Pet> pets;

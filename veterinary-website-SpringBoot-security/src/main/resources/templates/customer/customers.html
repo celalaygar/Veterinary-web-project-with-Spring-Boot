@@ -23,7 +23,8 @@
 						</div>
 					</div>
 				</form>
-				<a class="btn btn-success "href="/customers/customers">Tüm Müşterileri Göster</a>
+				<a class="btn btn-success" href="/customers/customers">Tüm Müşterileri Göster</a>
+				<a class="btn btn-info" href="/customers/insert-customer">Musteri Ekle</a>
 				<hr>
 			</div>
 			<div class="col-md-12">
@@ -37,10 +38,10 @@
 			<h3 > <span class="badge badge-primary">Müşteriler</span></h3>
 					<thead>
 						<tr>
-							<th scope="col">#</th>
 							<th scope="col">id</th>
 							<th scope="col">İsim</th>
 							<th scope="col">Soyisim</th>
+							<th scope="col">Telefon</th>
 							<th scope="col">Şehir</th>
 							<th scope="col">Email</th>
 							<th scope="col">İşlemler</th>
@@ -48,10 +49,10 @@
 					</thead>
 					<tbody>
 						<tr th:each="customer : ${customers}">
-							<th scope="row">#</th>
 							<td th:text="${customer.getCustomerid()}"></td>
 							<td th:text="${customer.getFirstname()}"></td>
 							<td th:text="${customer.getLastname()}"></td>
+							<td th:text="${customer.getPhone_number()}"></td>
 							<td th:text="${customer.getCity()}"></td>
 							<td th:text="${customer.getEmail() }"></td>
 							<td>

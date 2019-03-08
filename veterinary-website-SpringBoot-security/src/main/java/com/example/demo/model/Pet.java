@@ -18,7 +18,17 @@ public class Pet {
 
 	@Column(name = "problem")
 	private String problem;
+	@Column(name = "age")
+	private Long age;
 	
+	public Long getAge() {
+		return age;
+	}
+
+	public void setAge(Long age) {
+		this.age = age;
+	}
+
 	@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customerid")

@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Veteriner Uygulaması</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div lang="tr" th:replace="fragments/header :: header"></div> 
+			<div lang="tr" th:replace="fragments/header :: title"></div>
+			<div class="col-md-12"></div>
+			<div class="col-md-4"  >
+				<div class="card" style="width: 18rem;">
+					<img class="card-img-top" src="..." alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title"><span class="badge badge-primary" >Müşteri Bilgileri</span></h5>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item" th:text="${customer.getFirstname()}+' '+${customer.getLastname()}"></li>
+						<li class="list-group-item" th:text="${customer.getCity()}"></li>
+						<li class="list-group-item" th:text="${customer.getEmail()}"></li>
+					</ul>
+					<div class="card-body">
+						<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8" style="border:3px solid #ddd; padding: 5px 5px;" >
+				<h1 class="h3 mb-3 font-weight-normal"><span class="badge badge-info" >Hayvan Ekleme Bölümü</span></h1>
+				<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
+					<strong th:text="${message}"></strong> 
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			    <form autocomplete="off" action="#" th:action="@{'/pets/insert-pet/' + ${customer.getCustomerid()}}" th:object="${pet}" method="post">
+				    <hr>
+			    	<label>Tipi </label>
+			        <input type="text" id="firstName" placeholder="Hayvan tipi" th:field="*{type}" class="form-control"  required="required" /><br/>
+			        <label>İsmi</label>
+			        <input type="text" id="email" placeholder=" Hayvan ismi" th:field="*{name}" class="form-control" required="required"/><br/>
+			        <label> Yaşı</label>
+			        <input type="text" id="age" placeholder=" Hayvan yaşı" th:field="*{age}" class="form-control" required="required"/><br/>
+			        <label>Sağlık Problemi </label>
+			        <input type="text" id="password" placeholder="Sağlık Problemi " th:field="*{problem}" class="form-control" required="required"/><br/>
+			        <button type="submit" class="btn btn-primary text-center form-control">Ekle</button>
+			    </form>
+			</div>
+		</div>
+	</div>
+	
+	<div lang="tr" th:replace="fragments/header :: jsfile"></div>
+	</body>
+</html>

@@ -11,45 +11,36 @@
 			<div lang="tr" th:replace="fragments/header :: header"></div> 
 			<div lang="tr" th:replace="fragments/header :: title"></div>
 			<div class="col-md-12"></div>
-			<div class="col-md-12">
-				<h1 class="display-6">Müşteri Bilgileri</h1>
-				<table class="table table-hover">
-					 <thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">İsim</th>
-							<th scope="col">Soyiisim</th>
-							<th scope="col">Telefon</th>
-							<th scope="col">Şehir</th>
-							<th scope="col">Email</th>
-							<th scope="col">İşlemler</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">#</th>
-							<td th:text="${customer.getFirstname()}"></td>
-							<td th:text="${customer.getLastname()}"></td>
-							<td th:text="${customer.getPhone_number()}"></td>
-							<td th:text="${customer.getCity()}"></td>
-							<td th:text="${customer.getEmail()}"></td>
-							<td>
-								<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info">Göster</a>
-								<a th:href="@{'/customers/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-primary">Güncelle</a>
-								<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger" 
-										onclick="return confirm('Are you sure you want to delete this item?');">Sil</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="col-md-4"  >
+				<div class="card" style="width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title"><span class="badge badge-primary" >Müşteri Bilgileri</span></h5>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item" th:text="${customer.getFirstname()}+' '+${customer.getLastname()}"></li>
+						<li class="list-group-item" th:text="${customer.getCity()}"></li>
+						<li class="list-group-item" th:text="${customer.getEmail()}"></li>
+					</ul>
+					<div class="card-body">
+						<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
+						<a th:href="@{'/customers/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
+						<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm" 
+							onclick="return confirm('Are you sure you want to delete this item?');">Sil</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8" style="border:3px solid #ddd; padding: 5px 5px;" >
+				<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
+					<strong th:text="${message}"></strong> 
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
 				<a class="btn btn-warning" th:href="@{'/pets/insert-pet/' + ${customer.getCustomerid()}}">Hayvan Ekle</a>
 				<a class="btn btn-warning" th:href="@{'/pets/show-pets/' + ${customer.getCustomerid()}}">Hayvanları Görüntüle</a>
 			    <hr>
-			</div>
-			<div class="col-md-12" >
-
 				<h3><span class="badge badge-info" >Kayıtlı Hayvanların Listesi</span></h3>
-			    <hr>
+			    <hr>	
 				<table class="table table-striped table-sm">
 					<thead>
 						<tr>
@@ -75,7 +66,6 @@
 				</table>
 			    <hr>	
 			</div>
-		
 		</div>
 	</div>
 	

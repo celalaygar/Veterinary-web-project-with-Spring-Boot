@@ -32,7 +32,99 @@ public class PetController {
 	@Autowired
 	PetRepository petRepository;
 
+	@RequestMapping(value = "/show-pets/{customerid}", method = RequestMethod.GET)
+	public String CustomerShowPanel(@PathVariable int customerid, Map<String, Object> map) throws SQLException {
 
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("adminname", auth.getName());
+		try {
+			Customer customer = customerRepository.findById(customerid).get();
+			List<Pet> pets = petRepository.findByCustomer(customer);
+			map.put("title", "Müşteri Ait Hayvanlar");
+			map.put("customer", customer);
+			map.put("pet", new Pet());
+			map.put("pets", pets);
+			return "pet/pets";
+		} catch (Exception e) {
+			List<Customer> customers = customerRepository.findAll();
+			map.put("title", "Müşteriler");
+			map.put("customers", customers);
+			map.put("message", " Kayıt bulunamamıştır.");
+			return "customer/customers";
+		}
+		
+	}
+	@RequestMapping(value = "/insert-pet/{customerid}", method = RequestMethod.GET)
+	public String InsertPetPanel(@PathVariable int customerid, Map<String, Object> map,
+			@Valid @ModelAttribute("pet") Pet pet, BindingResult result, Model model)  throws SQLException {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("adminname", auth.getName());
+		try {
+			Customer customer = customerRepository.findById(customerid).get();
+			List<Pet> pets = petRepository.findByCustomer(customer);
+			map.put("title", "Müşteri Detayları");
+			map.put("customer", customer);
+			map.put("pet", new Pet());
+			map.put("pets", pets);
+
+			return "pet/pet-insert-panel";
+		} catch (Exception e) {
+			List<Customer> customers = customerRepository.findAll();
+			map.put("title", "Müşteriler");
+			map.put("customers", customers);
+			map.put("message", " Kayıt bulunamamıştır.");
+			return "customer/customers";
+		}
+		
+		
+	}
+	@RequestMapping(value = "/insert-pet/{customerid}", method = RequestMethod.POST)
+	public String InsertPet(@PathVariable int customerid, Map<String, Object> map,
+			@Valid @ModelAttribute("pet") Pet pet, BindingResult result, Model model)  throws SQLException {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("adminname", auth.getName());
+		if (!pet.getType().equals("") || !pet.getName().equals("") || !pet.getProblem().equals("") ) {
+			Customer customer = customerRepository.findById(customerid).get();
+			if (result.hasErrors()) {
+
+				return "customer/show-customer";
+			} else {
+
+				pet.setCustomer(customer);
+				petRepository.save(pet);
+			}
+			List<Pet> pets = petRepository.findByCustomer(customer);
+			map.put("title", "Müşteri Ait Hayvanlar");
+			map.put("customer", customer);
+			map.put("pet", new Pet());
+			map.put("pets", pets);
+			map.put("message", "Kayıt işlemi başarılı");
+			// return "redirect:/customers/show-customer/"+customerid;
+			return "pet/pets";
+		} else {
+
+			try {
+				Customer customer = customerRepository.findById(customerid).get();
+				List<Pet> pets = petRepository.findByCustomer(customer);
+				map.put("customer", customer);
+				map.put("pet", new Pet());
+				map.put("message", "Boş alanları doldurunuz");
+				map.put("pets", pets);
+
+				return "customer/show-customer";
+			} catch (Exception e) {
+				List<Customer> customers = customerRepository.findAll();
+				map.put("title", "Müşteriler");
+				map.put("customers", customers);
+				map.put("message", " Kayıt bulunamamıştır.");
+				return "customer/customers";
+			}
+		}
+	}
+	
+	
 	@RequestMapping(value = "/delete-pet/{pet_id}", method = RequestMethod.GET)
 	public String DeletePet(@PathVariable long pet_id, Map<String, Object> map, @Valid @ModelAttribute("pet") Pet pet,
 			BindingResult result, Model model) throws SQLException {
