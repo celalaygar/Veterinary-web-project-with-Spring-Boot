@@ -104,11 +104,8 @@ public class CustomerController {
 		map.put("adminname", auth.getName());
 		try {
 			Customer customer = customerRepository.findById(customerid).get();
-			List<Pet> pets = petRepository.findByCustomer(customer);
 			map.put("title", "Müşteri Detayları");
 			map.put("customer", customer);
-			map.put("pet", new Pet());
-			map.put("pets", pets);
 
 			return "customer/show-customer";
 		} catch (Exception e) {
@@ -131,7 +128,6 @@ public class CustomerController {
 			Customer customer = customerRepository.findById(customerid).get();
 			map.put("title", "Müşteri Güncelleme Bölümü");
 			map.put("customer", customer);
-			map.put("pet", new Pet());
 			return "customer/customer-update-panel";
 		} catch (Exception e) {
 			List<Customer> customers = customerRepository.findAll();

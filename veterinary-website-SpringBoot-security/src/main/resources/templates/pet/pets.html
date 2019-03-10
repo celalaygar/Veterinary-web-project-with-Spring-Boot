@@ -12,20 +12,17 @@
 			<div lang="tr" th:replace="fragments/header :: title"></div>
 			<div class="col-md-12"></div>
 			<div class="col-md-4"  >
+				<a class="btn btn-success" href="/customers/customers">Müşterileri Görüntüle</a>
+   				<hr>
 				<div class="card" style="width: 18rem;">
-					<div class="card-body">
-						<h5 class="card-title"><span class="badge badge-primary" >Müşteri Bilgileri</span></h5>
-					</div>
+					<div class="card-header"> Müşteri Bilgileri </div>
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item" th:text="${customer.getFirstname()}+' '+${customer.getLastname()}"></li>
 						<li class="list-group-item" th:text="${customer.getCity()}"></li>
 						<li class="list-group-item" th:text="${customer.getEmail()}"></li>
 					</ul>
 					<div class="card-body">
-						<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
-						<a th:href="@{'/customers/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
-						<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm" 
-							onclick="return confirm('Are you sure you want to delete this item?');">Sil</a>
+						<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Profili Görüntüle</a>
 					</div>
 				</div>
 			</div>
@@ -36,9 +33,20 @@
 					<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<a class="btn btn-warning" th:href="@{'/pets/insert-pet/' + ${customer.getCustomerid()}}">Hayvan Ekle</a>
 				<a class="btn btn-warning" th:href="@{'/pets/show-pets/' + ${customer.getCustomerid()}}">Hayvanları Görüntüle</a>
-			    <hr>
+				<a class="btn btn-warning" th:href="@{'/pets/insert-pet/' + ${customer.getCustomerid()}}">Hayvan Ekle</a>
+   				<hr>
+				<form th:action="@{'/pets/show-pets-by-name/'+${customer.getCustomerid()}}" th:object="${customer}" method="get">
+					<div class="form-group row">
+						<label for="searchCustomer" class="col-sm-4 col-form-label">Hayvan ismi giriniz</label>
+						<div class="col-sm-4">
+							<input type="text" name="name" class="form-control" id="searchCustomer" placeholder="İsim giriniz.">
+						</div>
+						<div class="col-sm-4">
+							<button type="submit" class="btn btn-primary mb-2">Bul</button>
+						</div>
+					</div>
+				</form>
 				<h3><span class="badge badge-info" >Kayıtlı Hayvanların Listesi</span></h3>
 			    <hr>	
 				<table class="table table-striped table-sm">

@@ -12,6 +12,7 @@ import com.example.demo.model.Pet;
 public interface PetRepository extends JpaRepository<Pet, Long> {
 
 	List<Pet> findByCustomer(Customer customer);
-
+	List<Pet> findByType(String type);
+	List<Pet> findByName(String name);
 
 }

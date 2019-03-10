@@ -27,10 +27,9 @@
 				<input type="hidden" th:value="${customerid}" th:field="*{customerid}" />
 		        <label>Müşteri Adı </label>
 		        <input type="text" id="firstName" placeholder="First Name" th:field="*{firstname}" class="form-control" required="required"/><br/>
-		        <label>Müşteri Soyadı </label>
+		        <label>Müşteri Soyadı </label> <input type="text" id="lastname" placeholder="First Name" th:field="*{lastname}" class="form-control" required="required"/><br/>
 		        <label>Telefon Numarası</label>
 		        <input type="text" id="phone_number" placeholder="Telefon Numarası" th:field="*{phone_number}" class="form-control" required="required"/><br/>
-		        <input type="text" id="lastname" placeholder="First Name" th:field="*{lastname}" class="form-control" required="required"/><br/>
 		        <label>Şehir</label>
 		        <input type="text" id="city" placeholder=" Email" th:field="*{city}" class="form-control" required="required"/><br/>
 		        <label>Email</label>

@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.Customer;
@@ -33,7 +36,7 @@ public class PetController {
 	PetRepository petRepository;
 
 	@RequestMapping(value = "/show-pets/{customerid}", method = RequestMethod.GET)
-	public String CustomerShowPanel(@PathVariable int customerid, Map<String, Object> map) throws SQLException {
+	public String PetsShowPanel(@PathVariable int customerid, Map<String, Object> map) throws SQLException {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		map.put("adminname", auth.getName());
@@ -54,6 +57,41 @@ public class PetController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/show-pets-by-name/{customerid}", method = RequestMethod.GET)
+	public String PetsShowPanel2(@RequestParam("name") String name,@PathVariable int customerid, Map<String, Object> map) throws SQLException {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("adminname", auth.getName());
+		Customer customer = customerRepository.findById(customerid).get();
+		try {
+			List<Pet> pets2 = petRepository.findByCustomer(customer);
+			List<Pet> pets=new ArrayList<>();
+			pets2.stream().forEach(item-> {
+				if(item.getName().equals(name))	{
+					item=item;
+					System.out.println(item.getId()+" : "+item.getName()+" "+item.getProblem());
+					pets.add(item);
+				}
+			});
+			if(pets.size()>0) {
+				map.put("pets", pets);
+				map.put("message", name+" isme ait bir hayvan bulunmuştur.");
+			}
+			else {
+				map.put("message", name+" isme ait bir hayvan bulunamamıştır.");
+			}
+		} catch (Exception e) {
+			List<Pet> pets = petRepository.findByCustomer(customer);
+			map.put("pets", pets);
+			map.put("message", name+" isme ait bir hayvan bulunamamıştır.");
+		}
+		map.put("title", "Müşteri Ait Hayvanlar");
+		map.put("customer", customer);
+		return "pet/pets";
+		
+	}
+	
 	@RequestMapping(value = "/insert-pet/{customerid}", method = RequestMethod.GET)
 	public String InsertPetPanel(@PathVariable int customerid, Map<String, Object> map,
 			@Valid @ModelAttribute("pet") Pet pet, BindingResult result, Model model)  throws SQLException {
