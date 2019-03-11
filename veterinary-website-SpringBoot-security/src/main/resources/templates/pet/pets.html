@@ -11,16 +11,20 @@
 			<div lang="tr" th:replace="fragments/header :: header"></div> 
 			<div lang="tr" th:replace="fragments/header :: title"></div>
 			<div class="col-md-12"></div>
-			<div class="col-md-4"  >
+			<div class="col-md-4">
 				<a class="btn btn-success" href="/customers/customers">Müşterileri Görüntüle</a>
-   				<hr>
+				<hr>
 				<div class="card" style="width: 18rem;">
-					<div class="card-header"> Müşteri Bilgileri </div>
+					<div class="card-header">
+					Featured
+					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item" th:text="${customer.getFirstname()}+' '+${customer.getLastname()}"></li>
+						<li class="list-group-item" th:text="${customer.getFirstname()}"></li>
+						<li class="list-group-item" th:text="${customer.getLastname()}"></li>
+						<li class="list-group-item" th:text="${customer.getPhone_number()}"></li>
 						<li class="list-group-item" th:text="${customer.getCity()}"></li>
 						<li class="list-group-item" th:text="${customer.getEmail()}"></li>
-					</ul>
+					</ul>	
 					<div class="card-body">
 						<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Profili Görüntüle</a>
 					</div>

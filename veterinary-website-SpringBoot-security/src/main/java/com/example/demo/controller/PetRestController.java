@@ -28,7 +28,7 @@ public class PetRestController {
 	PetRepository petRepository;
 	
 	
-	@RequestMapping(value = "/pets-by-customer-id/{customerid}", method = RequestMethod.GET)
+	@RequestMapping(value = "/pets/{customerid}", method = RequestMethod.GET)
 	public ResponseEntity<List<Pet>> findAllPets(@PathVariable int customerid, Map<String, Object> map) throws SQLException {
 
 		Customer customer = customerRepository.findById(customerid).get();
