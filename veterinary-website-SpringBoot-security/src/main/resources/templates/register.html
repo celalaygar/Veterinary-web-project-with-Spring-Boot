@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="tr">
 <head>
     <title>Veteriner Uygulaması</title>
     <meta charset="utf-8"/>
@@ -38,6 +38,13 @@
 						<label th:text="'female'"></label>
 					</li>
 				</ul>
+				<br/>
+				<label>Role Seçiniz.</label>
+				<select name="roles">
+				  <option th:each="role : ${roles}" 
+				          th:value="${role.getRole_id()}" 
+				          th:text="${role.getRole()}"></option>
+				</select>
 				<br/>
 		        <label>Eposta</label>
 		        <input type="text" id="email" placeholder=" Email" th:field="*{email}" class="form-control" required="required"/><br/>
