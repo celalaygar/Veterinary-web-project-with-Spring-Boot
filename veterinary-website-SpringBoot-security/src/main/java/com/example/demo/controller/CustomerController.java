@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.nio.file.AccessDeniedException;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -157,11 +159,9 @@ public class CustomerController {
 		map.put("customers", customers);
 		return "customer/customers";
 	}
-
 	@RequestMapping(value = "/delete-customer/{customerid}", method = RequestMethod.GET)
 	public String CustomerDelete(@PathVariable int customerid, Map<String, Object> map) throws SQLException {
 		
-
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		map.put("adminname", auth.getName());
 		try {
@@ -174,7 +174,7 @@ public class CustomerController {
 		} catch (Exception e) {
 			map.put("message", " Kayıt bulunamamıştır.");
 		}
-
+		
 		List<Customer> customers = customerRepository.findAll();
 		map.put("title", "Müşteriler");
 		map.put("customers", customers);

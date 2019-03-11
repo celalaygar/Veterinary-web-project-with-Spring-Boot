@@ -107,7 +107,7 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value = "//update-user-password/{email}", method = RequestMethod.GET)
+	@RequestMapping(value = "/update-user-password/{email}", method = RequestMethod.GET)
 	public String UserPasswordUpdatePanel(@PathVariable String email, Map<String, Object> map) throws SQLException {
 
 		
