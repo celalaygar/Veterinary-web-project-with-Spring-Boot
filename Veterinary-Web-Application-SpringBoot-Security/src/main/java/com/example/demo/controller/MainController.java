@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
+import com.example.demo.model.Citys;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
@@ -68,6 +71,7 @@ public class MainController {
 		List<Role> roles=roleRepository.findAll();
 		map.put("title", "Doktor Kayıt Sayfası");
 		map.put("roles", roles);
+		map.put("citys", new ArrayList<Citys>(Arrays.asList(Citys.values())));
 		model.addAttribute("user", new User());
 		return "register";
 	}

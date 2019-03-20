@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
+import com.example.demo.model.Citys;
 import com.example.demo.model.Customer;
 import com.example.demo.model.Pet;
 import com.example.demo.model.Role;
@@ -68,6 +71,7 @@ public class UserController {
 		if(users.size()>0) {
 			if(auth.getName().equals(users.get(0).getEmail())) {
 				map.put("user", users.get(0));
+				map.put("citys", new ArrayList<Citys>(Arrays.asList(Citys.values())));
 				return "user/user-update-panel";
 			}else {
 				map.put("message", email+" email adresi size ait değildir.");

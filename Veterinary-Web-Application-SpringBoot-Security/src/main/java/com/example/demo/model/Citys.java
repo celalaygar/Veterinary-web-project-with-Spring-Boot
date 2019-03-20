@@ -1,0 +1,24 @@
+package com.example.demo.model;
+
+public enum Citys {
+	ANKARA,
+	ANTALYA,
+	AYDIN,
+	BURSA,
+	BOLU,
+	CANAKKALE,
+	ESKISEHIR,
+	EDIRNE,
+	DENIZLI,
+	IZMIR,
+	ISTANBUL,
+	KONYA,
+	MANISA,
+	SAMSUN,
+	KARABUK,
+	SAKARYA,
+	TEKIRDAG,
+	YOZGAT,
+	ZONGULDAK
+
+}

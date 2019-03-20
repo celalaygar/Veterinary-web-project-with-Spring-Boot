@@ -23,6 +23,10 @@ public class User {
 	private String password;
 	private String reel_password;
 
+	@Column(name="city")
+	@Enumerated(EnumType.STRING)
+	private Citys city;
+
 	@Column(name="email")
 	private String email;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -30,6 +34,14 @@ public class User {
 	private Set<Role> roles;
 	
 	
+	public Citys getCity() {
+		return city;
+	}
+
+	public void setCity(Citys city) {
+		this.city = city;
+	}
+
 	public String getReel_password() {
 		return reel_password;
 	}

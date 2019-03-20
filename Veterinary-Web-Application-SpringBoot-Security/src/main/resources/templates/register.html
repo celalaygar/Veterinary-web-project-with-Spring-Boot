@@ -46,6 +46,13 @@
 				          th:text="${role.getRole()}"></option>
 				</select>
 				<br/>
+				<label>Şehir Seçiniz.</label>
+				<select name="city">
+				  <option th:each="city : ${citys}" 
+				          th:value="${city.name()}" 
+				          th:text="${city.name()}"></option>
+				</select>
+				<br/>
 		        <label>Eposta</label>
 		        <input type="text" id="email" placeholder=" Email" th:field="*{email}" class="form-control" required="required"/><br/>
 		        <label>Parolanız </label>
