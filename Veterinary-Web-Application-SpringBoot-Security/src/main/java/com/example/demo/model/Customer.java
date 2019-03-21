@@ -20,9 +20,12 @@ public class Customer {
 	private int customerid;
 	private String firstname;
 	private String lastname;
-	private String city;
 	private String email;
 	private String phone_number;
+	
+	@Column(name="city")
+	@Enumerated(EnumType.STRING)
+	private Citys city;
 	
 	public String getPhone_number() {
 		return phone_number;
@@ -60,11 +63,12 @@ public class Customer {
 		this.lastname = lastname;
 	}
 
-	public String getCity() {
+
+	public Citys getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public void setCity(Citys city) {
 		this.city = city;
 	}
 

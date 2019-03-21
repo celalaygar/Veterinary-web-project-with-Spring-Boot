@@ -14,7 +14,7 @@
 		<div class="col-md-6">
 			<img alt=""  class="img-thumbnail " src="https://www.bukrek.com/images/veteriner-gunu.jpg">
 		</div>
-		<div class="col-md-6" >
+		<div class="col-md-6" style="border:2px solid #ddd">
 			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
 				<strong th:text="${message}"></strong> 
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -38,16 +38,14 @@
 						<label th:text="'female'"></label>
 					</li>
 				</ul>
-				<br/>
 				<label>Role Seçiniz.</label>
-				<select name="roles">
+				<select name="roles" class="form-control">
 				  <option th:each="role : ${roles}" 
 				          th:value="${role.getRole_id()}" 
 				          th:text="${role.getRole()}"></option>
-				</select>
-				<br/>
+				</select><br/>
 				<label>Şehir Seçiniz.</label>
-				<select name="city">
+				<select name="city" class="form-control">
 				  <option th:each="city : ${citys}" 
 				          th:value="${city.name()}" 
 				          th:text="${city.name()}"></option>

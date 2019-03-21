@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import java.nio.file.AccessDeniedException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.model.Citys;
 import com.example.demo.model.Customer;
 import com.example.demo.model.Pet;
 import com.example.demo.model.Role;
@@ -79,6 +82,7 @@ public class CustomerController {
 		map.put("title", "Müşteri Ekleme Bölümü");
 		map.put("adminname", auth.getName());
 		map.put("customer", new Customer());
+		map.put("citys", new ArrayList<Citys>(Arrays.asList(Citys.values())));
 		return "customer/customer-insert-panel";
 	}
 
@@ -130,6 +134,7 @@ public class CustomerController {
 			Customer customer = customerRepository.findById(customerid).get();
 			map.put("title", "Müşteri Güncelleme Bölümü");
 			map.put("customer", customer);
+			map.put("citys", new ArrayList<Citys>(Arrays.asList(Citys.values())));
 			return "customer/customer-update-panel";
 		} catch (Exception e) {
 			List<Customer> customers = customerRepository.findAll();

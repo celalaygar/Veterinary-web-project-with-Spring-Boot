@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.model.Animals;
+import com.example.demo.model.Citys;
 import com.example.demo.model.Customer;
 import com.example.demo.model.Pet;
 import com.example.demo.repository.CustomerRepository;
@@ -105,6 +108,7 @@ public class PetController {
 			map.put("customer", customer);
 			map.put("pet", new Pet());
 			map.put("pets", pets);
+			map.put("types", new ArrayList<Animals>(Arrays.asList(Animals.values())));
 
 			return "pet/pet-insert-panel";
 		} catch (Exception e) {
@@ -123,7 +127,7 @@ public class PetController {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		map.put("adminname", auth.getName());
-		if (!pet.getType().equals("") || !pet.getName().equals("") || !pet.getProblem().equals("") ) {
+		if (!pet.getName().equals("") || !pet.getProblem().equals("") ) {
 			Customer customer = customerRepository.findById(customerid).get();
 			if (result.hasErrors()) {
 

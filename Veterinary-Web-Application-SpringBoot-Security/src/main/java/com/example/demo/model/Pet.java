@@ -10,8 +10,9 @@ public class Pet {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "type")
-	private String type;
+	@Column(name="animal_type")
+	@Enumerated(EnumType.STRING)
+	private Animals type;
 	
 	@Column(name = "name")
 	private String name;
@@ -20,7 +21,7 @@ public class Pet {
 	private String problem;
 	@Column(name = "age")
 	private Long age;
-	
+
 	public Long getAge() {
 		return age;
 	}
@@ -41,7 +42,7 @@ public class Pet {
 		super();
 	}
 
-	public Pet(String type, String name, String problem, Customer customer) {
+	public Pet(Animals type, String name, String problem, Customer customer) {
 		super();
 		this.type = type;
 		this.name = name;
@@ -57,11 +58,12 @@ public class Pet {
 		this.id = id;
 	}
 
-	public String getType() {
+
+	public Animals getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Animals type) {
 		this.type = type;
 	}
 
