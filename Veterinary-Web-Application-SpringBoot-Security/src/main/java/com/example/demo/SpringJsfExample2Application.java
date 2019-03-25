@@ -1,10 +1,13 @@
 package com.example.demo;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.demo.controller.MainController;
 import com.example.demo.model.Role;
 import com.example.demo.repository.RoleRepository;
 
@@ -15,6 +18,7 @@ public class SpringJsfExample2Application implements CommandLineRunner  {
 	RoleRepository rolerepository;
 	
 	public static void main(String[] args) {
+		new File(MainController.uploadDirectory).mkdir();
 		SpringApplication.run(SpringJsfExample2Application.class, args);
 	}
 

@@ -22,6 +22,7 @@ public class User {
 	private String gender;
 	private String password;
 	private String reel_password;
+	private String image;
 
 	@Column(name="city")
 	@Enumerated(EnumType.STRING)
@@ -52,6 +53,14 @@ public class User {
 
 	public String getFirstname() {
 		return firstname;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public void setFirstname(String firstname) {

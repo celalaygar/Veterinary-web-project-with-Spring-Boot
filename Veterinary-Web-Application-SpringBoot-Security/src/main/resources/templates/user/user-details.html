@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+ <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 	<div class="container">
@@ -19,9 +21,38 @@
 					</button>
 				</div>
 			</div>
+			<hr>
 			<div class="col-md-6">
-				<img alt="" class="img-thumbnail "
-					src="https://img-s1.onedio.com/id-5b3a2a0b457511730e6f787e/rev-0/raw/s-1df81c8d8203e9d6d42b7a8a112f1a234afb02c0.jpg">
+				<h2 style="text-align: center;margin: auto;"><span class="badge badge-success" >Profil Resmi Yükleme Bölümü</span></h2>
+				<hr>
+				<form th:action="@{'/users/upload-image/'+${adminname}+'/'}"  method="post" enctype="multipart/form-data" >
+					<div class="form-row">
+					<div class="custom-file">
+					    <input type="file" name="files" class="custom-file-input" id="validatedCustomFile" required>
+					    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+					    <div class="invalid-feedback">Example invalid custom file feedback</div>
+				    </div>
+				    </div>
+				    <br/>
+				    <div class="form-row">
+					      <input id="uploadBtn" type="submit" class="btn btn-primary" value=" Yükle "></input>
+				    </div>
+				</form>
+				<div class="col-md-12"  th:if="${message_2}" >
+					<div class="alert alert-success  alert-dismissible fade show" role="alert" >
+						<strong th:text="${message_2}"></strong> 
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				</div>
+				<hr>
+				<div class="card" style="width: 18rem;">
+<!-- 					<img class="card-img-top"  th:src="@{/uploads/fatih terim.jpg}"> -->
+					<img class="card-img-top" th:src="@{'/img/'+${user.getImage()}}"  width="100" >
+				</div>
+				<hr>
+
 			</div>
 			<div class="col-md-6"  th:if="${user}">
 				<ul class="list-group" style="font-weight: bold">
@@ -32,13 +63,13 @@
 					<li class="list-group-item" th:text="'Şehir : '+${user.getCity()}"></li>
 					<li class="list-group-item" th:text="'Email : '+${user.getEmail()}"></li>
 					<li class="list-group-item" th:text="'Cinsiyet : '+${user.getGender()}"></li>
-
 				</ul>
+
 				<hr>
 				<div class="margin-top20 text-center">
-					<a class="btn btn-info" th:href="@{'/users/update-user/' + ${adminname}}">Bilgileri Güncelle</a>
-					<a class="btn btn-warning" th:href="@{'/users/update-user-password/' + ${adminname}}">Şifreyi Güncelle</a>
-					<a class="btn btn-danger" th:href="@{'/users/delete-user/' + ${adminname}}">Sil</a>
+					<a class="btn btn-info" th:href="@{'/users/update-user/' + ${adminname}+'/'}">Bilgileri Güncelle</a>
+					<a class="btn btn-warning" th:href="@{'/users/update-user-password/' + ${adminname}+'/'}">Şifreyi Güncelle</a>
+					<a class="btn btn-danger" th:href="@{'/users/delete-user/' + ${adminname}+'/'}">Sil</a>
 				</div>
 			</div>
 

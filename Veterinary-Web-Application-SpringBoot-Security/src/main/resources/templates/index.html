@@ -9,6 +9,7 @@
 	crossorigin="anonymous">
 <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 	<div class="container">
@@ -16,11 +17,25 @@
 			<div lang="tr" th:replace="fragments/header :: header"></div> 
 			<div lang="tr" th:replace="fragments/header :: title"></div>
 			<div class="col-md-6">
+				<h1>Merhaba </h1>
+				<hr>
 				<img alt="" class="img-thumbnail "
 					src="https://img-s1.onedio.com/id-5b3a2a0b457511730e6f787e/rev-0/raw/s-1df81c8d8203e9d6d42b7a8a112f1a234afb02c0.jpg">
+					
+<!-- 				<img alt="" class="img-thumbnail " -->
+<!-- 					src="/img/angular7.png" th:src="@{/img/angular7.png}"> -->
+
+				<hr>
+
 			</div>
 			<div class="col-md-6">
 				<hr>
+				<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
+					<strong th:text="${message}"></strong> 
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
 				<h1 class="h3 mb-3 font-weight-normal"><span class="badge badge-info">Biz kimiz ?</span></h1>
 				<p>Ankara'da 7 GÜN / 24 SAAT açık olan veteriner kliniğimiz
 					sizlere ve dostlarınıza maksimum kalitede hizmet vermeyi temel amaç
