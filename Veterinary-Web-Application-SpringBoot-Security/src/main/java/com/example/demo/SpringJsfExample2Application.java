@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import com.example.demo.controller.MainController;
 import com.example.demo.model.Role;
@@ -22,6 +23,8 @@ public class SpringJsfExample2Application implements CommandLineRunner  {
 		SpringApplication.run(SpringJsfExample2Application.class, args);
 	}
 
+
+	
 	@Override
 	public void run(String... args) throws Exception {
 		Role role1=new Role();

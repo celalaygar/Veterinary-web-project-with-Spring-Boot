@@ -184,11 +184,11 @@ public class PetController {
 			
 			Customer customer = customerRepository.findById(customerid).get();
 			List<Pet> pets = petRepository.findByCustomer(customer);
-			map.put("title", "Müşteri Detayları");
+			map.put("title", "Müşteri Ait Hayvanlar");
 			map.put("customer", customer);
+			map.put("pet", new Pet());
 			map.put("pets", pets);
-			map.put("message", "Kayıt silinmiştir.");
-			return "customer/show-customer";
+			return "pet/pets";
 
 
 		} catch (Exception e) {

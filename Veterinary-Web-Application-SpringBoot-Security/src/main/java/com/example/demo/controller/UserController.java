@@ -42,13 +42,16 @@ public class UserController {
 
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/img/";
 	
-	@Autowired
 	private UserRepository userRepository;
 	
-
-	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
+	public UserController(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+		super();
+		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncoder;
+	}
+
 	@RequestMapping(value = "/show-user/{email}/", method = RequestMethod.GET)
 	public String UserShowPanel(@PathVariable String email, Map<String, Object> map) throws SQLException {
 
