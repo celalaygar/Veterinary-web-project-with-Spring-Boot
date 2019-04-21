@@ -12,8 +12,8 @@
 			<div lang="tr" th:replace="fragments/header :: title"></div>
 			<div class="col-md-12"></div>
 			<div class="col-md-4">
-				<a class="btn btn-success" href="/customers/customers">Müşterileri Görüntüle</a>
-				<a class="btn btn-info" href="/customers/insert-customer">Musteri Ekle</a>
+				<a class="btn btn-success" href="/customer/customers">Müşterileri Görüntüle</a>
+				<a class="btn btn-info" href="/customer/insert-customer">Musteri Ekle</a>
 				<hr>
 				<div class="card" style="width: 18rem;">
 					<div class="card-header">
@@ -27,16 +27,16 @@
 						<li class="list-group-item" th:text="${customer.getEmail()}"></li>
 					</ul>	
 					<div class="card-body">
-						<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Profili Görüntüle</a>
-						<a th:href="@{'/customers/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-success btn-sm">Güncelle</a>
-						<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm" 
+						<a th:href="@{'/customer/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Profili Görüntüle</a>
+						<a th:href="@{'/customer/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-success btn-sm">Güncelle</a>
+						<a th:href="@{'/customer/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm" 
 								onclick="return confirm('Are you sure you want to delete this item?');">Sil</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-8" >
-				<a class="btn btn-warning" th:href="@{'/pets/show-pets/' + ${customer.getCustomerid()}}">Hayvanları Görüntüle</a>
-				<a class="btn btn-warning" th:href="@{'/pets/insert-pet/' + ${customer.getCustomerid()}}">Hayvan Ekle</a>
+				<a class="btn btn-warning" th:href="@{'/pet/show-pets/' + ${customer.getCustomerid()}}">Hayvanları Görüntüle</a>
+				<a class="btn btn-warning" th:href="@{'/pet/insert-pet/' + ${customer.getCustomerid()}}">Hayvan Ekle</a>
 			    <hr>
 				<img alt=""  class="img-thumbnail " src="https://www.bukrek.com/images/veteriner-gunu.jpg">
 			</div>

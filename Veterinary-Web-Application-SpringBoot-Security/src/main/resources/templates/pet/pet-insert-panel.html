@@ -23,7 +23,7 @@
 						<li class="list-group-item" th:text="${customer.getEmail()}"></li>
 					</ul>
 					<div class="card-body">
-						<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
+						<a th:href="@{'/customer/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
 					</div>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 					<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-			    <form autocomplete="off" action="#" th:action="@{'/pets/insert-pet/' + ${customer.getCustomerid()}}" th:object="${pet}" method="post">
+			    <form autocomplete="off" action="#" th:action="@{'/pet/insert-pet/' + ${customer.getCustomerid()}}" th:object="${pet}" method="post">
 				    <hr>
   					<label>Tür Seçiniz</label>
 					<select name="type" class="form-control" th:field="*{type}">

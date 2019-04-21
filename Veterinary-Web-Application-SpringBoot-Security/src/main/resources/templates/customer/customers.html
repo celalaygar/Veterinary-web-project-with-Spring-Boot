@@ -11,10 +11,10 @@
 			<div lang="tr" th:replace="fragments/header :: header"></div> 
 			<div lang="tr" th:replace="fragments/header :: title"></div>
 			<div class="col-md-12">
-				<a class="btn btn-success" href="/customers/customers">Müşterileri Görüntüle</a>
-				<a class="btn btn-info" href="/customers/insert-customer">Musteri Ekle</a>
+				<a class="btn btn-success" href="/customer/customers">Müşterileri Görüntüle</a>
+				<a class="btn btn-info" href="/customer/insert-customer">Musteri Ekle</a>
 				<hr>
-				<form th:action="@{/customers/get-customers}" th:object="${customer}" method="get">
+				<form th:action="@{/customer/get-customers}" th:object="${customer}" method="get">
 					<div class="form-group row">
 						<label for="searchCustomer" class="col-sm-2 col-form-label">Müşreti Ara</label>
 						<div class="col-sm-4">
@@ -55,9 +55,9 @@
 							<td th:text="${customer.getCity()}"></td>
 							<td th:text="${customer.getEmail() }"></td>
 							<td>
-								<a th:href="@{'/customers/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
-								<a th:href="@{'/customers/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
-								<a th:href="@{'/customers/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm" 
+								<a th:href="@{'/customer/show-customer/' + ${customer.getCustomerid()}}" class="btn btn-info btn-sm">Göster</a>
+								<a th:href="@{'/customer/update-customer/' + ${customer.getCustomerid()}}" class="btn btn-danger btn-sm">Güncelle</a>
+								<a th:href="@{'/customer/delete-customer/' + ${customer.getCustomerid()}}" class="btn btn-warning btn-sm" 
 									onclick="return confirm('Are you sure you want to delete this item?');">Sil</a>
 							</td>
 						</tr>

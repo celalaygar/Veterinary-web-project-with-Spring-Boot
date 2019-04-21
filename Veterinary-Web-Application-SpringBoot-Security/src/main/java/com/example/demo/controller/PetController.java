@@ -28,9 +28,10 @@ import com.example.demo.model.Customer;
 import com.example.demo.model.Pet;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.repository.PetRepository;
+import com.example.demo.util.ApiPaths;
 
 @Controller
-@RequestMapping("/pets")
+@RequestMapping(ApiPaths.PetBasicCtrl.CTRL)
 public class PetController {
 	@Autowired
 	CustomerRepository customerRepository;

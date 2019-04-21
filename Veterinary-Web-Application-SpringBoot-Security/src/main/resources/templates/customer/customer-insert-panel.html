@@ -23,7 +23,7 @@
 				<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-		    <form autocomplete="off" action="#" th:action="@{/customers/insert-customer}" th:object="${customer}" method="post">
+		    <form autocomplete="off" action="#" th:action="@{/customer/insert-customer}" th:object="${customer}" method="post">
 		        <label>Müşteri Adı </label>
 		        <input type="text" id="firstName" placeholder="First Name" th:field="*{firstname}" class="form-control" required="required"/><br/>
 		        <label>Müşteri Soyadı </label>
@@ -40,7 +40,7 @@
 		        <input type="email" id="email" placeholder=" Email" th:field="*{email}" class="form-control" required="required"/><br/>
 		        <button type="submit" class="btn btn-primary text-center form-control">Kaydet</button>
 		    </form>
-    		<div class="margin-top20 text-center"><a th:href="@{/customers/customers}">Müşterileri Gör</a></div>
+    		<div class="margin-top20 text-center"><a th:href="@{/customer/customers}">Müşterileri Gör</a></div>
 		</div>
 	</div>
 </div>

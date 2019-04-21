@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +32,10 @@ import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.repository.PetRepository;
+import com.example.demo.util.ApiPaths;
 
 @Controller
-@RequestMapping("/customers")
+@RequestMapping(ApiPaths.CustomerBasicCtrl.CTRL)
 public class CustomerController {
 	@Autowired
 	CustomerRepository customerRepository;
@@ -41,6 +43,14 @@ public class CustomerController {
 	@Autowired
 	PetRepository petRepository;
 
+	@ResponseBody
+	@GetMapping()
+	public String hello() {
+		
+		return "hello customer";
+	}
+	
+	
 	@RequestMapping(value = "/customers", method = RequestMethod.GET)
 	public String getAllCustomers(Map<String, Object> map) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

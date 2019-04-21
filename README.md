@@ -7,9 +7,9 @@
 ## How to run this project.
 - 1. Download this project then open this project on eclipse.
 - 2. After opening this project. right click on project then configure-> convert to maven project.
-- 3. Open application.properties file. write ` spring.jpa.hibernate.ddl-auto=create ` then you can run this project on eclipse.
-- 4. After writing on application.properties file Your database's table can create regularly after writing or typing
-- 5. While running this project then write again ` spring.jpa.hibernate.ddl-auto=update ` because this project contain devtools for `Automatic reload` throug devtools. 
+- 3. Open application.properties file. write ` spring.jpa.hibernate.ddl-auto=update ` then you can run this project on eclipse.
+- 4. Your database's table can create regularly After writing on application.properties file 
+- 5. because this project contain devtools for `Automatic reload` throug devtools. 
 - 6. Let's start using this project.
 #### Using Tools & Technologies
 ``` 

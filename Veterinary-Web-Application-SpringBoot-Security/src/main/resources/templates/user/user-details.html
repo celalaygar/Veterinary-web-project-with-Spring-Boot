@@ -25,7 +25,7 @@
 			<div class="col-md-6">
 				<h2 style="text-align: center;margin: auto;"><span class="badge badge-success" >Profil Resmi Yükleme Bölümü</span></h2>
 				<hr>
-				<form th:action="@{'/users/upload-image/'+${adminname}+'/'}"  method="post" enctype="multipart/form-data" >
+				<form th:action="@{'/user/upload-image/'+${adminname}+'/'}"  method="post" enctype="multipart/form-data" >
 					<div class="form-row">
 					<div class="custom-file">
 					    <input type="file" name="files" class="custom-file-input" id="validatedCustomFile" required>
@@ -67,9 +67,9 @@
 
 				<hr>
 				<div class="margin-top20 text-center">
-					<a class="btn btn-info" th:href="@{'/users/update-user/' + ${adminname}+'/'}">Bilgileri Güncelle</a>
-					<a class="btn btn-warning" th:href="@{'/users/update-user-password/' + ${adminname}+'/'}">Şifreyi Güncelle</a>
-					<a class="btn btn-danger" th:href="@{'/users/delete-user/' + ${adminname}+'/'}">Sil</a>
+					<a class="btn btn-info" th:href="@{'/user/update-user/' + ${adminname}+'/'}">Bilgileri Güncelle</a>
+					<a class="btn btn-warning" th:href="@{'/user/update-user-password/' + ${adminname}+'/'}">Şifreyi Güncelle</a>
+					<a class="btn btn-danger" th:href="@{'/user/delete-user/' + ${adminname}+'/'}">Sil</a>
 				</div>
 			</div>
 

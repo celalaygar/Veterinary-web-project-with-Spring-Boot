@@ -35,9 +35,10 @@ import com.example.demo.model.Pet;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.util.ApiPaths;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping(ApiPaths.UserBasicCtrl.CTRL)
 public class UserController {
 
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/img/";
