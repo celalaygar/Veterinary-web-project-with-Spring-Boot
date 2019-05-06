@@ -36,8 +36,6 @@ public class Pet {
 	public Customer customer;
 
 	
-	
-	
 	public Pet() {
 		super();
 	}

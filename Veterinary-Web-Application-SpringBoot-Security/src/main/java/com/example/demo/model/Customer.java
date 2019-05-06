@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -35,9 +36,8 @@ public class Customer {
 		this.phone_number = phone_number;
 	}
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	private Set<Pet> pets;
+	private List<Pet> pets;
 
 	public int getCustomerid() {
 		return customerid;
@@ -72,11 +72,13 @@ public class Customer {
 		this.city = city;
 	}
 
-	public Set<Pet> getPets() {
+
+
+	public List<Pet> getPets() {
 		return pets;
 	}
 
-	public void setPets(Set<Pet> pets) {
+	public void setPets(List<Pet> pets) {
 		this.pets = pets;
 	}
 

@@ -30,6 +30,8 @@ public class CustomerRestController {
 		return customers;
 	}
 	
+	//http://localhost:8182/rest/customer/5
+	//http://localhost:8182/rest/customer/8
 	@RequestMapping(value = "/customer/{customerid}", method = RequestMethod.GET)
 	public Customer CustomerShowPanel(@PathVariable int customerid, Map<String, Object> map) throws SQLException {
 		//Customer customer = customerRepository.findById(customerid).get();
