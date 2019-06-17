@@ -15,6 +15,6 @@ public interface CustomerService {
 	public List<Customer> findByFirstname(String name);
 	public List<Customer> findByLastname(String name);
 	public Boolean save(Customer customer) ;
-	public Optional<Customer> findById(int customerid)
+	public Optional<Customer> findById(int customerid);
 	public Boolean delete(Customer customer);
 }
